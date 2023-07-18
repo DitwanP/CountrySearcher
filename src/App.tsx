@@ -1,22 +1,21 @@
 import { useState } from "react";
+import Navbar from "./components/Navbar";
+import SearchInput from "./components/SearchInput";
+import FilterInput from "./components/FilterInput";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  console.log(isDarkMode);
 
   return (
-    <div className="h-screen bg-slate-600 p-5">
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+    <div className="h-screen bg-slate-400">
+      <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+      <div className="mt-14 flex w-full flex-col gap-14 px-8">
+        <div className="flex w-full flex-col justify-between gap-14 md:flex-row">
+          <SearchInput />
+          <FilterInput />
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   );
 }
