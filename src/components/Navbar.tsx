@@ -1,6 +1,6 @@
-import CrescentMoon from "../assets/crescent-moon.svg";
-import Sun from "../assets/sun.svg";
-import Globe from "../assets/globe.svg";
+import CrescentMoon from "../assets/images/crescent-moon.svg";
+import Sun from "../assets/images/sun.svg";
+import Globe from "../assets/images/globe.svg";
 
 interface NavbarProps {
   isDarkMode: boolean;

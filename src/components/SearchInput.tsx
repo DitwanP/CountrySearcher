@@ -1,4 +1,4 @@
-import MagnifyingGlass from "../assets/magnifying-glass.svg";
+import MagnifyingGlass from "../assets/images/magnifying-glass.svg";
 
 const SearchInput = () => {
   return (

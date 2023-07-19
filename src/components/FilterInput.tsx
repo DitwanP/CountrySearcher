@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { RegionFilterInterface } from "../utilities/Interfaces";
 
-import ChevronDown from "../assets/chevron-down.svg";
+import ChevronDown from "../assets/images/chevron-down.svg";
 
 interface FilterInputProps {
   filterState: RegionFilterInterface;
