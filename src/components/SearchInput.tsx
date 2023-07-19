@@ -14,7 +14,7 @@ const SearchInput = () => {
         type="text"
         id="countrySearchInput"
         placeholder="Search for a country..."
-        className="h-24 w-full max-w-[480px] rounded-lg px-[70px] text-[16px] placeholder:text-dark-blue focus-visible:border-2 focus-visible:border-dark-blue focus-visible:outline-none"
+        className="h-24 w-full max-w-[480px] rounded-lg px-[70px] text-[16px] text-very-dark-blueT placeholder:text-[16px] placeholder:text-very-dark-blueT focus-visible:border-2 focus-visible:border-very-dark-blueT focus-visible:outline-none"
       />
     </div>
   );

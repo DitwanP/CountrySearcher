@@ -21,15 +21,26 @@ const Navbar = (props: NavbarProps) => {
       <div className="flex h-full items-center gap-1">
         <button
           onClick={() => setIsDarkMode(!isDarkMode)}
-          className="border- flex h-16 w-16 items-center justify-center"
+          className="flex h-16 w-16 items-center justify-center focus-visible:border-2 focus-visible:border-very-dark-blueT focus-visible:outline-none"
         >
-          <img
-            src={isDarkMode ? Sun : CrescentMoon}
-            alt="Crescent Moon Icon"
-            className="h-8 w-8 md:h-20 md:w-20"
-          />
+          {isDarkMode && (
+            <img
+              src={Sun}
+              alt="Sun Icon"
+              className="h-10 w-10 md:h-20 md:w-20"
+            />
+          )}
+          {!isDarkMode && (
+            <img
+              src={CrescentMoon}
+              alt="Crescent Moon Icon"
+              className="h-8 w-8 md:h-20 md:w-20"
+            />
+          )}
         </button>
-        <p className="text-[16px] font-bold">Dark Mode</p>
+        <p className="text-[16px] font-semibold text-very-dark-blueT">
+          {isDarkMode ? "Light Mode" : "Dark Mode"}
+        </p>
       </div>
     </div>
   );
