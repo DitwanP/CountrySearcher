@@ -2,13 +2,17 @@ import { Country } from "../utilities/Interfaces";
 
 interface CountryCardProps {
   countryInfo: Country;
+  lastCountryRef?: (element: any) => void;
 }
 
 const CountryCard = (props: CountryCardProps) => {
-  const { countryInfo } = props;
+  const { countryInfo, lastCountryRef } = props;
 
   return (
-    <div className="flex h-[420px] w-full flex-col rounded-lg bg-white shadow-md">
+    <div
+      className="flex h-[420px] w-full flex-col rounded-lg bg-white shadow-md"
+      ref={lastCountryRef}
+    >
       <img
         src={countryInfo.flag}
         alt={`${countryInfo.name}'s flag`}

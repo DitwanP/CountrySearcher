@@ -1,6 +1,7 @@
 import { Country } from "../utilities/Interfaces";
 import { FilterSet } from "../utilities/Types";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { useIntersection } from "@mantine/hooks";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useMutateCountries } from "../utilities/Hooks";
 import CountryData from "../assets/data/country-data.json";
@@ -36,11 +37,19 @@ const CountryList = (props: CountryListProps) => {
     }
   );
 
-  const getCountryCards = (page: Country[]) => {
-    return page.map((country, j) => (
-      <CountryCard countryInfo={country} key={j} />
-    ));
-  };
+  const _countries = data?.pages.flatMap((page) => page);
+
+  const lastCountryRef = useRef<HTMLDivElement>();
+  const { ref, entry } = useIntersection({
+    root: lastCountryRef.current,
+    threshold: 1,
+  });
+
+  useEffect(() => {
+    if (entry?.isIntersecting) {
+      fetchNextPage();
+    }
+  }, [entry]);
 
   useEffect(() => {
     refetch();
@@ -48,20 +57,16 @@ const CountryList = (props: CountryListProps) => {
 
   return (
     <div className="z-0 flex w-full flex-col items-center justify-center gap-20 sm:grid md:grid-cols-2 lg:grid-cols-4">
-      {data?.pages.map((page) => {
-        return getCountryCards(page);
+      {_countries?.map((country, i) => {
+        return i === _countries.length - 1 ? (
+          <CountryCard countryInfo={country} key={i} lastCountryRef={ref} />
+        ) : (
+          <CountryCard countryInfo={country} key={i} />
+        );
       })}
-      <button
-        onClick={() => fetchNextPage()}
-        disabled={isFetchingNextPage}
-        className="h-20 w-96 bg-white p-4 text-2xl shadow-md"
-      >
-        {isFetchingNextPage
-          ? "Loading..."
-          : (data?.pages.length ?? 0) < 25
-          ? "Load More"
-          : "Nothing more to load"}
-      </button>
+      {(data?.pages.length ?? 0 > 25) && (
+        <p className="text-2xl">Nothing more to load</p>
+      )}
     </div>
   );
 };
