@@ -30,3 +30,5 @@ export type RegionalBloc = {
   name: string;
   otherNames?: string[];
 };
+
+export type FilterSet = Set<string>;

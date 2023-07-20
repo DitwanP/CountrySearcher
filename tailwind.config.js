@@ -13,6 +13,9 @@ export default {
         "dark-gray": "#858585",
         "light-gray": "#fafafa",
       },
+      fontSize: {
+        "4.5xl": "2.6rem",
+      },
     },
   },
   plugins: [],

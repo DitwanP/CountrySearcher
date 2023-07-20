@@ -10,7 +10,7 @@ interface NavbarProps {
 const Navbar = (props: NavbarProps) => {
   const { isDarkMode, setIsDarkMode } = props;
   return (
-    <div className="flex h-[95px] items-center justify-between bg-white px-8">
+    <div className="flex h-[95px] items-center justify-between bg-white px-8 shadow-md">
       <div className="flex items-center justify-center">
         <img
           src={Globe}

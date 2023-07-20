@@ -1,39 +1,34 @@
 import { useState } from "react";
-import { RegionFilterInterface } from "./utilities/Interfaces";
-import { Country } from "./utilities/Interfaces";
+import { FilterSet } from "./utilities/Types";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import CountryData from "./assets/data/country-data.json";
 import Navbar from "./components/Navbar";
 import SearchInput from "./components/SearchInput";
 import FilterInput from "./components/FilterInput";
+import CountryList from "./components/CountryList";
 
-const defaultFilters: RegionFilterInterface = {
-  africa: false,
-  america: false,
-  asia: false,
-  europe: false,
-  oceania: false,
-};
+const defaultFilterState: FilterSet = new Set();
 
-const countries: Country[] = CountryData;
+const queryClient = new QueryClient();
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const [filters, setFilters] = useState(defaultFilters);
-  const [countryList, setCountryList] = useState(countries);
+  const [filters, setFilters] = useState(defaultFilterState);
+  const [userSearchInput, setUserSearchInput] = useState("");
 
-  console.log(countries);
   return (
-    <div className="h-screen overflow-hidden bg-slate-400">
-      <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-      <div className="flex h-full w-full flex-col gap-14 overflow-y-auto px-8 pt-14">
-        <div className="flex w-full flex-col justify-between gap-14 md:flex-row">
-          <SearchInput />
-          <FilterInput filterState={filters} filterStateSetter={setFilters} />
+    <QueryClientProvider client={queryClient}>
+      <div className="min-h-[calc(100vh-95px)] bg-slate-300">
+        <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+        <div className="z-0 flex h-full min-h-[calc(100vh-95px)] w-full flex-col gap-14 overflow-y-auto px-8 py-14">
+          <div className="z-10 flex w-full flex-col justify-between gap-14 md:flex-row">
+            <SearchInput setUserSearchInput={setUserSearchInput} />
+            <FilterInput filterState={filters} filterStateSetter={setFilters} />
+          </div>
+          <CountryList userSearchInput={userSearchInput} filters={filters} />
         </div>
-        <div className=""></div>
       </div>
-    </div>
+    </QueryClientProvider>
   );
 }
 

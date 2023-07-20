@@ -1,14 +1,5 @@
 import { Currency, Language, Translations, RegionalBloc } from "./Types";
 
-export interface RegionFilterInterface {
-  [key: string]: boolean;
-  africa: boolean;
-  america: boolean;
-  asia: boolean;
-  europe: boolean;
-  oceania: boolean;
-}
-
 export interface Country {
   name: string;
   topLevelDomain: string[];
