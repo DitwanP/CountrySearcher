@@ -6,8 +6,9 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useMutateCountries } from "../utilities/Hooks";
 import CountryData from "../assets/data/country-data.json";
 import CountryCard from "../components/CountryCard";
+import getCountries from "../utilities/functions/getCountries";
 
-const countries: Country[] = CountryData;
+const allCountriesInfo: Country[] = CountryData;
 export interface CountryListProps {
   userSearchInput: string;
   filters: FilterSet;
@@ -15,46 +16,25 @@ export interface CountryListProps {
 
 const CountryList = (props: CountryListProps) => {
   const { userSearchInput, filters } = props;
-  const mutateCountriesParams = { userSearchInput, filters, countries };
-
   const cardsPerPage = 16;
   const [isInitialFetch, setIsInitialFetch] = useState(true);
-
+  const mutateCountriesParams = { userSearchInput, filters, allCountriesInfo };
   const queriedCountries = useMutateCountries(mutateCountriesParams);
-
-  const getCountries = async (page: number, initalFetch: boolean) => {
-    if (initalFetch) {
-      const randomTimeout = Math.floor(Math.random() * 500) + 500;
-      if (page == 1) {
-        await new Promise((resolve) => setTimeout(resolve, randomTimeout));
-      }
-    }
-
-    const randomTimeout = Math.floor(Math.random() * 200) + 200;
-    if (page == 1) {
-      await new Promise((resolve) => setTimeout(resolve, randomTimeout));
-    }
-
-    return queriedCountries.slice(
-      (page - 1) * cardsPerPage,
-      page * cardsPerPage
-    );
-  };
 
   const { data, fetchNextPage, refetch, isFetching } = useInfiniteQuery({
     queryKey: ["countriesQuery"],
     queryFn: ({ pageParam = 1 }) => {
       if (isInitialFetch) {
-        return getCountries(pageParam, true);
+        return getCountries(pageParam, cardsPerPage, true, queriedCountries);
       }
-      return getCountries(pageParam, false);
+      return getCountries(pageParam, cardsPerPage, false, queriedCountries);
     },
     getNextPageParam: (_, pages) => pages.length + 1,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });
 
-  const _countries = data?.pages.flatMap((page) => page);
+  const currentCountriesInfo = data?.pages.flatMap((page) => page);
 
   const countryListRef: any = useRef<HTMLDivElement>();
   const { ref, entry } = useIntersection({
@@ -85,9 +65,9 @@ const CountryList = (props: CountryListProps) => {
       2xl:grid-cols-4 2xl:grid-rows-4"
     >
       {isFetching
-        ? [...Array(cardsPerPage)].map((e, i) => <CountryCard key={i} />)
-        : _countries?.map((country, i) => {
-            return i === _countries.length - 1 ? (
+        ? [...Array(cardsPerPage)].map((_e, i) => <CountryCard key={i} />)
+        : currentCountriesInfo?.map((country, i) => {
+            return i === currentCountriesInfo.length - 1 ? (
               <CountryCard countryInfo={country} key={i} lastCountryRef={ref} />
             ) : (
               <CountryCard countryInfo={country} key={i} />

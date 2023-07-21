@@ -3,23 +3,23 @@ import { Country } from "./Interfaces";
 import { CountryListProps } from "../components/CountryList";
 
 interface UseMutatCountriesProps extends CountryListProps {
-  countries: Country[];
+  allCountriesInfo: Country[];
 }
 
 export function useMutateCountries(props: UseMutatCountriesProps) {
-  const { userSearchInput, filters, countries } = props;
-  const [queriedCountries, setQueriedCountries] = useState(countries);
+  const { userSearchInput, filters, allCountriesInfo } = props;
+  const [queriedCountries, setQueriedCountries] = useState(allCountriesInfo);
 
   useEffect(() => {
     let newCountriesList;
 
     // Filter by search if there is user input
     if (userSearchInput) {
-      newCountriesList = countries.filter((country) => {
+      newCountriesList = allCountriesInfo.filter((country) => {
         return country.name.toLowerCase().startsWith(userSearchInput);
       });
     } else {
-      newCountriesList = countries;
+      newCountriesList = allCountriesInfo;
     }
 
     // Filter the list return from the search query
