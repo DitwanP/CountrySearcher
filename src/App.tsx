@@ -18,9 +18,13 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-[calc(100vh-95px)] bg-slate-300">
+      <div className="bg-slate-300">
         <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-        <div className="z-0 flex h-full min-h-[calc(100vh-95px)] w-full flex-col gap-14 overflow-y-auto px-8 py-14">
+        <div
+          className="z-0 mx-auto flex h-full min-h-[calc(100vh-95px)] w-full max-w-[400px] 
+        flex-col gap-14 px-8 py-20 sm:max-w-screen-2xl md:gap-[60px]
+        md:pt-24 2xl:px-0"
+        >
           <div className="z-10 flex w-full flex-col justify-between gap-14 md:flex-row">
             <SearchInput setUserSearchInput={setUserSearchInput} />
             <FilterInput filterState={filters} filterStateSetter={setFilters} />

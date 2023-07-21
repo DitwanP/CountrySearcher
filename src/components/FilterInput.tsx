@@ -28,7 +28,9 @@ const FilterInput = (props: FilterInputProps) => {
     <div className="relative flex flex-col gap-1">
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="flex h-24 w-[250px] items-center justify-between rounded-lg bg-white p-8 text-[16px] text-very-dark-blueT drop-shadow-md focus-visible:border-2 focus-visible:border-very-dark-blueT focus-visible:outline-none"
+        className="flex h-24 items-center justify-between rounded-lg bg-white p-8 
+        text-[16px] text-very-dark-blueT drop-shadow-md focus-visible:border-2 
+        focus-visible:border-very-dark-blueT focus-visible:outline-none md:w-[250px]"
       >
         Filter by Region
         <img

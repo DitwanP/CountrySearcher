@@ -16,12 +16,20 @@ body {
   overflow-x: hidden;
 }
 
-.animated-container {
-  line-height: 1;
+.flag-skeleton-container span:first-child {
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
-@media (min-width: 1024px) {
-  .animated-container div:first-of-type {
-    margin-right: -10px;
+.fade-in {
+  opacity: 0;
+  animation: fade-in 0.7s ease-in forwards;
+}
+
+@keyframes fade-in {
+  100% {
+    opacity: 1;
   }
 }

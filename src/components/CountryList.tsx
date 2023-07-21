@@ -1,12 +1,13 @@
 import { Country } from "../utilities/Interfaces";
 import { FilterSet } from "../utilities/Types";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useIntersection } from "@mantine/hooks";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useMutateCountries } from "../utilities/Hooks";
 import CountryData from "../assets/data/country-data.json";
-import CountryCard from "./CountryCard";
+import CountryCard from "../components/CountryCard";
 
+const countries: Country[] = CountryData;
 export interface CountryListProps {
   userSearchInput: string;
   filters: FilterSet;
@@ -14,35 +15,52 @@ export interface CountryListProps {
 
 const CountryList = (props: CountryListProps) => {
   const { userSearchInput, filters } = props;
-  const countries: Country[] = CountryData;
-  const queriedCountries = useMutateCountries({
-    userSearchInput,
-    filters,
-    countries,
-  });
+  const mutateCountriesParams = { userSearchInput, filters, countries };
 
-  const getCountries = (page: number) => {
-    return queriedCountries.slice((page - 1) * 10, page * 10);
+  const cardsPerPage = 16;
+  const [isInitialFetch, setIsInitialFetch] = useState(true);
+
+  const queriedCountries = useMutateCountries(mutateCountriesParams);
+
+  const getCountries = async (page: number, initalFetch: boolean) => {
+    if (initalFetch) {
+      const randomTimeout = Math.floor(Math.random() * 500) + 500;
+      if (page == 1) {
+        await new Promise((resolve) => setTimeout(resolve, randomTimeout));
+      }
+    }
+
+    const randomTimeout = Math.floor(Math.random() * 200) + 200;
+    if (page == 1) {
+      await new Promise((resolve) => setTimeout(resolve, randomTimeout));
+    }
+
+    return queriedCountries.slice(
+      (page - 1) * cardsPerPage,
+      page * cardsPerPage
+    );
   };
 
-  const { data, fetchNextPage, isFetchingNextPage, refetch } = useInfiniteQuery(
-    {
-      queryKey: ["countriesQuery"],
-      queryFn: ({ pageParam = 1 }) => getCountries(pageParam),
-      getNextPageParam: (_, pages) => pages.length + 1,
-      initialData: {
-        pages: [queriedCountries.slice(0, 10)],
-        pageParams: [1],
-      },
-    }
-  );
+  const { data, fetchNextPage, refetch, isFetching } = useInfiniteQuery({
+    queryKey: ["countriesQuery"],
+    queryFn: ({ pageParam = 1 }) => {
+      if (isInitialFetch) {
+        return getCountries(pageParam, true);
+      }
+      return getCountries(pageParam, false);
+    },
+    getNextPageParam: (_, pages) => pages.length + 1,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  });
 
   const _countries = data?.pages.flatMap((page) => page);
 
-  const lastCountryRef = useRef<HTMLDivElement>();
+  const countryListRef: any = useRef<HTMLDivElement>();
   const { ref, entry } = useIntersection({
-    root: lastCountryRef.current,
-    threshold: 1,
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.1,
   });
 
   useEffect(() => {
@@ -55,20 +73,28 @@ const CountryList = (props: CountryListProps) => {
     refetch();
   }, [queriedCountries]);
 
+  useEffect(() => {
+    setIsInitialFetch(false);
+  }, []);
+
   return (
-    <div className="z-0 flex w-full flex-col items-center justify-center gap-20 sm:grid md:grid-cols-2 lg:grid-cols-4">
-      {_countries?.map((country, i) => {
-        return i === _countries.length - 1 ? (
-          <CountryCard countryInfo={country} key={i} lastCountryRef={ref} />
-        ) : (
-          <CountryCard countryInfo={country} key={i} />
-        );
-      })}
-      {(data?.pages.length ?? 0 > 25) && (
-        <p className="text-2xl">Nothing more to load</p>
-      )}
+    <div
+      ref={countryListRef}
+      className="z-0 flex w-full flex-col items-center justify-start gap-20
+      sm:grid sm:grid-cols-2 sm:justify-items-center lg:grid-cols-3
+      2xl:grid-cols-4 2xl:grid-rows-4"
+    >
+      {isFetching
+        ? [...Array(cardsPerPage)].map((e, i) => <CountryCard key={i} />)
+        : _countries?.map((country, i) => {
+            return i === _countries.length - 1 ? (
+              <CountryCard countryInfo={country} key={i} lastCountryRef={ref} />
+            ) : (
+              <CountryCard countryInfo={country} key={i} />
+            );
+          })}
     </div>
   );
 };
 
-export default CountryList;
+export default React.memo(CountryList);
