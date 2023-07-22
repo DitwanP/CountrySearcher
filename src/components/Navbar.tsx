@@ -16,32 +16,42 @@ const Navbar = (props: NavbarProps) => {
           <img
             src={Globe}
             alt="Crescent Moon Icon"
-            className="h-10 w-10 md:h-20 md:w-20"
+            className="h-10 w-10 md:h-14 md:w-14"
           />
         </div>
-        <div className="flex h-full items-center gap-1">
+        <div className="flex h-full items-center transition-all">
           <button
             onClick={() => setIsDarkMode(!isDarkMode)}
-            className="flex h-16 w-16 items-center justify-center focus-visible:border-2 focus-visible:border-very-dark-blueT focus-visible:outline-none"
+            className="no-tap-highlighting flex h-16 items-center justify-center 
+            gap-3 focus-visible:border-2 focus-visible:border-very-dark-blueT
+            focus-visible:outline-none"
           >
             {isDarkMode && (
               <img
                 src={Sun}
                 alt="Sun Icon"
-                className="h-10 w-10 md:h-20 md:w-20"
+                className="fade-in h-10 w-10 md:h-12 md:w-12"
               />
             )}
             {!isDarkMode && (
               <img
                 src={CrescentMoon}
                 alt="Crescent Moon Icon"
-                className="h-8 w-8 md:h-20 md:w-20"
+                className="fade-in h-8 w-8 md:h-10 md:w-10"
               />
             )}
+
+            {isDarkMode && (
+              <span className="fade-in text-[16px] font-normal text-very-dark-blueT">
+                Light Mode
+              </span>
+            )}
+            {!isDarkMode && (
+              <span className="fade-in text-[16px] font-normal text-very-dark-blueT">
+                Dark Mode
+              </span>
+            )}
           </button>
-          <p className="text-[16px] font-semibold text-very-dark-blueT">
-            {isDarkMode ? "Light Mode" : "Dark Mode"}
-          </p>
         </div>
       </div>
     </div>

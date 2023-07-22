@@ -7,9 +7,7 @@ interface SearchInputProps {
 const SearchInput = (props: SearchInputProps) => {
   const { setUserSearchInput } = props;
 
-  const handleInput: React.ChangeEventHandler<HTMLInputElement> | undefined = (
-    e
-  ) => {
+  const handleInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setUserSearchInput(e.target.value);
   };
 
@@ -19,7 +17,7 @@ const SearchInput = (props: SearchInputProps) => {
         <img
           src={MagnifyingGlass}
           alt="Magnifying Glass Icon"
-          className="absolute left-8 top-1/2 z-10 h-10 w-10 -translate-y-1/2 md:h-14 md:w-14"
+          className="absolute left-8 top-1/2 z-10 h-10 w-10 -translate-y-1/2 md:h-12 md:w-12"
         ></img>
       </label>
       <input
@@ -27,7 +25,7 @@ const SearchInput = (props: SearchInputProps) => {
         id="countrySearchInput"
         onChange={handleInput}
         placeholder="Search for a country..."
-        className="h-24 w-full rounded-lg px-[60px] text-[16px] 
+        className="h-24 w-full rounded-xl px-[60px] text-[16px] 
         text-very-dark-blueT drop-shadow-md placeholder:text-[16px] 
         placeholder:text-very-dark-blueT focus-visible:border-2 
         focus-visible:border-very-dark-blueT focus-visible:outline-none"

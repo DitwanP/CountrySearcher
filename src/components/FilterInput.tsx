@@ -25,25 +25,33 @@ const FilterInput = (props: FilterInputProps) => {
   });
 
   return (
-    <div className="relative flex flex-col gap-1">
+    <div className="relative flex h-24 flex-col gap-1 rounded-xl bg-white">
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="flex h-24 items-center justify-between rounded-lg bg-white p-8 
-        text-[16px] text-very-dark-blueT drop-shadow-md focus-visible:border-2 
-        focus-visible:border-very-dark-blueT focus-visible:outline-none md:w-[250px]"
+        className="no-tap-highlighting flex h-full items-center justify-between 
+        p-8 text-[16px] text-very-dark-blueT drop-shadow-md transition-transform
+        duration-300 focus-visible:border-2 focus-visible:border-very-dark-blueT
+        focus-visible:outline-none md:w-[250px]"
       >
         Filter by Region
         <img
           src={ChevronDown}
           alt="Downward Chevron Icon"
-          className="h-12 w-8 md:h-20 md:w-20"
+          className={`h-12 w-8 transition-transform duration-200 ${
+            isMenuOpen && "rotate-180"
+          }`}
         />
       </button>
-      {isMenuOpen && (
-        <div className="ites absolute top-[62.5px] flex w-[250px] flex-col rounded-lg bg-white p-8 shadow-lg">
+
+      <div className="absolute top-[65px] h-[240px] w-[250px] overflow-hidden">
+        <div
+          className={`absolute top-[-260px] flex w-full flex-col rounded-lg bg-white
+          p-8 opacity-0 drop-shadow-lg transition-all duration-[500ms]
+          ease-in-out ${isMenuOpen ? "translate-y-[260px] opacity-100" : ""}`}
+        >
           {dropdownOptions}
         </div>
-      )}
+      </div>
     </div>
   );
 };

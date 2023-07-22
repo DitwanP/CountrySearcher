@@ -16,6 +16,10 @@ body {
   overflow-x: hidden;
 }
 
+.no-tap-highlighting {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .flag-skeleton-container span:first-child {
   border-top-left-radius: 0.75rem;
   border-top-right-radius: 0.75rem;
@@ -26,6 +30,12 @@ body {
 .fade-in {
   opacity: 0;
   animation: fade-in 0.7s ease-in forwards;
+}
+
+.slide-up {
+  opacity: 1;
+  bottom: 25px;
+  animation-timing-function: ease-in;
 }
 
 @keyframes fade-in {
