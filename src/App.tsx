@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FilterSet } from "./utilities/Types";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -8,7 +8,6 @@ import FilterInput from "./components/FilterInput";
 import CountryList from "./components/CountryList";
 
 const defaultFilterState: FilterSet = new Set();
-
 const queryClient = new QueryClient();
 
 function App() {
@@ -21,11 +20,11 @@ function App() {
       <div className="bg-slate-300">
         <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
         <div
-          className="z-0 mx-auto flex h-full min-h-[calc(100vh-95px)] w-full max-w-[400px] 
-        flex-col gap-14 px-8 py-20 sm:max-w-screen-2xl md:gap-[60px]
-        md:pt-24 2xl:px-0"
+          className="mx-auto mt-[95px] flex h-full min-h-[calc(100vh-95px)] w-full max-w-[400px] 
+          flex-col gap-14 px-8 py-20 sm:max-w-screen-2xl md:gap-[60px]
+          md:px-10 md:pt-24 2xl:px-0"
         >
-          <div className="z-10 flex w-full flex-col justify-between gap-14 md:flex-row">
+          <div className="flex w-full flex-col justify-between gap-14 sm:flex-row">
             <SearchInput setUserSearchInput={setUserSearchInput} />
             <FilterInput filterState={filters} filterStateSetter={setFilters} />
           </div>

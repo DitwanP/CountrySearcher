@@ -1,12 +1,13 @@
-import { Country } from "../utilities/Interfaces";
+import { Country, DialogStateInterface } from "../utilities/Interfaces";
 import { FilterSet } from "../utilities/Types";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useIntersection } from "@mantine/hooks";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useMutateCountries } from "../utilities/Hooks";
 import CountryData from "../assets/data/country-data.json";
 import CountryCard from "../components/CountryCard";
 import getCountries from "../utilities/functions/getCountries";
+import DetailsDialog from "./DetailsDialog";
 
 const allCountriesInfo: Country[] = CountryData;
 export interface CountryListProps {
@@ -14,10 +15,16 @@ export interface CountryListProps {
   filters: FilterSet;
 }
 
+const defaultDialogState: DialogStateInterface = {
+  isOpen: false,
+  country: undefined,
+};
+
 const CountryList = (props: CountryListProps) => {
   const { userSearchInput, filters } = props;
   const cardsPerPage = 16;
   const [isInitialFetch, setIsInitialFetch] = useState(true);
+  const [dialogInfo, setDialogInfo] = useState(defaultDialogState);
   const mutateCountriesParams = { userSearchInput, filters, allCountriesInfo };
   const queriedCountries = useMutateCountries(mutateCountriesParams);
 
@@ -57,23 +64,41 @@ const CountryList = (props: CountryListProps) => {
     setIsInitialFetch(false);
   }, []);
 
+  console.log("From list: ", dialogInfo);
+
   return (
     <div
       ref={countryListRef}
-      className="z-0 flex w-full flex-col items-center justify-start gap-20 md:flex-row
-      md:flex-wrap md:justify-between md:gap-x-3"
+      className="flex w-full flex-col items-center justify-start gap-x-2 gap-y-14
+      sm:flex-row sm:flex-wrap sm:justify-between"
     >
       {isFetching
         ? [...Array(cardsPerPage)].map((_e, i) => <CountryCard key={i} />)
         : currentCountriesInfo?.map((country, i) => {
             return i === currentCountriesInfo.length - 1 ? (
-              <CountryCard countryInfo={country} key={i} lastCountryRef={ref} />
+              <CountryCard
+                countryInfo={country}
+                key={i}
+                lastCountryRef={ref}
+                setDialogInfo={setDialogInfo}
+              />
             ) : (
-              <CountryCard countryInfo={country} key={i} />
+              <CountryCard
+                countryInfo={country}
+                key={i}
+                setDialogInfo={setDialogInfo}
+              />
             );
           })}
+      {dialogInfo.isOpen && (
+        <DetailsDialog
+          isOpen={dialogInfo.isOpen}
+          setDialogInfo={setDialogInfo}
+          country={dialogInfo.country}
+        />
+      )}
     </div>
   );
 };
 
-export default React.memo(CountryList);
+export default CountryList;

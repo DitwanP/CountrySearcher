@@ -30,3 +30,14 @@ export interface Country {
   cioc?: string;
   independent: boolean;
 }
+
+export interface DialogStateInterface {
+  isOpen: boolean;
+  country: Country | undefined;
+}
+
+export interface DialogProps {
+  country: Country | undefined;
+  isOpen: boolean;
+  setDialogInfo: React.Dispatch<React.SetStateAction<DialogStateInterface>>;
+}

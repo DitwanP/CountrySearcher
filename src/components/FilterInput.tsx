@@ -25,32 +25,30 @@ const FilterInput = (props: FilterInputProps) => {
   });
 
   return (
-    <div className="relative flex h-24 flex-col gap-1 rounded-xl bg-white">
+    <div className="relative z-10 flex h-24 min-w-[200px] flex-col gap-1">
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="no-tap-highlighting flex h-full items-center justify-between 
-        p-8 text-[16px] text-very-dark-blueT drop-shadow-md transition-transform
-        duration-300 focus-visible:border-2 focus-visible:border-very-dark-blueT
-        focus-visible:outline-none md:w-[250px]"
+        className="no-tap-highlighting flex h-full items-center justify-between
+          rounded-xl bg-white p-8 text-[16px] text-very-dark-blueT
+          drop-shadow-md transition-transform duration-300 focus-visible:border-2
+          focus-visible:border-very-dark-blueT focus-visible:outline-none md:w-[250px]"
       >
         Filter by Region
         <img
           src={ChevronDown}
           alt="Downward Chevron Icon"
-          className={`h-12 w-8 transition-transform duration-200 ${
+          className={`pointer-events-none h-12 w-8 touch-none transition-transform duration-300 ${
             isMenuOpen && "rotate-180"
           }`}
         />
       </button>
-
-      <div className="absolute top-[65px] h-[240px] w-[250px] overflow-hidden">
-        <div
-          className={`absolute top-[-260px] flex w-full flex-col rounded-lg bg-white
-          p-8 opacity-0 drop-shadow-lg transition-all duration-[500ms]
-          ease-in-out ${isMenuOpen ? "translate-y-[260px] opacity-100" : ""}`}
-        >
-          {dropdownOptions}
-        </div>
+      <div
+        className={`absolute top-[65px] flex h-0 w-full transform-gpu flex-col
+            justify-between overflow-hidden rounded-lg bg-white px-8 opacity-0
+            drop-shadow-2xl transition-all duration-[400ms] ease-in-out
+            ${isMenuOpen && "h-[250px] py-8 opacity-100"}`}
+      >
+        {dropdownOptions}
       </div>
     </div>
   );

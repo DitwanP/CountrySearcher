@@ -10,7 +10,7 @@ interface NavbarProps {
 const Navbar = (props: NavbarProps) => {
   const { isDarkMode, setIsDarkMode } = props;
   return (
-    <div className="h-[95px] bg-white px-8 shadow-md">
+    <div className="fixed top-0 z-20 h-[95px] w-full bg-white px-8 shadow-md">
       <div className="mx-auto flex h-[95px] max-w-screen-2xl items-center justify-between">
         <div className="flex items-center justify-center">
           <img

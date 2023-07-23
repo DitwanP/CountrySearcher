@@ -18,7 +18,7 @@ const SearchInput = (props: SearchInputProps) => {
           src={MagnifyingGlass}
           alt="Magnifying Glass Icon"
           className="absolute left-8 top-1/2 z-10 h-10 w-10 -translate-y-1/2 md:h-12 md:w-12"
-        ></img>
+        />
       </label>
       <input
         type="text"
