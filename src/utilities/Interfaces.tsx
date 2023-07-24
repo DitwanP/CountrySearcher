@@ -39,5 +39,6 @@ export interface DialogStateInterface {
 export interface DialogProps {
   country: Country | undefined;
   isOpen: boolean;
+  isDarkMode: boolean;
   setDialogInfo: React.Dispatch<React.SetStateAction<DialogStateInterface>>;
 }

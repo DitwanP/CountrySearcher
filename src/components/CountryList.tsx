@@ -3,7 +3,7 @@ import { FilterSet } from "../utilities/Types";
 import { useEffect, useRef, useState } from "react";
 import { useIntersection } from "@mantine/hooks";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useMutateCountries } from "../utilities/Hooks";
+import { useMutateCountries } from "../utilities/hooks/UseMutateCountries";
 import CountryData from "../assets/data/country-data.json";
 import CountryCard from "../components/CountryCard";
 import getCountries from "../utilities/functions/getCountries";
@@ -13,6 +13,7 @@ const allCountriesInfo: Country[] = CountryData;
 export interface CountryListProps {
   userSearchInput: string;
   filters: FilterSet;
+  isDarkMode: boolean;
 }
 
 const defaultDialogState: DialogStateInterface = {
@@ -21,7 +22,7 @@ const defaultDialogState: DialogStateInterface = {
 };
 
 const CountryList = (props: CountryListProps) => {
-  const { userSearchInput, filters } = props;
+  const { userSearchInput, filters, isDarkMode } = props;
   const cardsPerPage = 16;
   const [isInitialFetch, setIsInitialFetch] = useState(true);
   const [dialogInfo, setDialogInfo] = useState(defaultDialogState);
@@ -73,19 +74,23 @@ const CountryList = (props: CountryListProps) => {
       sm:flex-row sm:flex-wrap sm:justify-between"
     >
       {isFetching
-        ? [...Array(cardsPerPage)].map((_e, i) => <CountryCard key={i} />)
+        ? [...Array(cardsPerPage)].map((_e, i) => (
+            <CountryCard key={i} isDarkMode={isDarkMode} />
+          ))
         : currentCountriesInfo?.map((country, i) => {
             return i === currentCountriesInfo.length - 1 ? (
               <CountryCard
-                countryInfo={country}
                 key={i}
+                isDarkMode={isDarkMode}
+                countryInfo={country}
                 lastCountryRef={ref}
                 setDialogInfo={setDialogInfo}
               />
             ) : (
               <CountryCard
-                countryInfo={country}
                 key={i}
+                isDarkMode={isDarkMode}
+                countryInfo={country}
                 setDialogInfo={setDialogInfo}
               />
             );
@@ -93,6 +98,7 @@ const CountryList = (props: CountryListProps) => {
       {dialogInfo.isOpen && (
         <DetailsDialog
           isOpen={dialogInfo.isOpen}
+          isDarkMode={isDarkMode}
           setDialogInfo={setDialogInfo}
           country={dialogInfo.country}
         />

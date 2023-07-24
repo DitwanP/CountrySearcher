@@ -1,12 +1,12 @@
 import MagnifyingGlass from "../assets/images/magnifying-glass.svg";
+import MagnifyingGlassWhite from "../assets/images/magnifying-glass-white.svg";
 
 interface SearchInputProps {
+  isDarkMode: boolean;
   setUserSearchInput: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const SearchInput = (props: SearchInputProps) => {
-  const { setUserSearchInput } = props;
-
+const SearchInput = ({ isDarkMode, setUserSearchInput }: SearchInputProps) => {
   const handleInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setUserSearchInput(e.target.value);
   };
@@ -15,20 +15,20 @@ const SearchInput = (props: SearchInputProps) => {
     <div className="relative z-0 w-full md:max-w-[480px]">
       <label htmlFor="countrySearchInput">
         <img
-          src={MagnifyingGlass}
+          src={isDarkMode ? MagnifyingGlassWhite : MagnifyingGlass}
           alt="Magnifying Glass Icon"
-          className="absolute left-8 top-1/2 z-10 h-10 w-10 -translate-y-1/2 md:h-12 md:w-12"
+          className="absolute left-8 top-1/2 z-10 h-8 w-8 -translate-y-1/2 md:h-8 md:w-8"
         />
       </label>
       <input
         type="text"
         id="countrySearchInput"
         onChange={handleInput}
-        placeholder="Search for a country..."
-        className="h-24 w-full rounded-xl px-[60px] text-[16px] 
-        text-very-dark-blueT drop-shadow-md placeholder:text-[16px] 
-        placeholder:text-very-dark-blueT focus-visible:border-2 
-        focus-visible:border-very-dark-blueT focus-visible:outline-none"
+        placeholder="SEARCH FOR A COUNTRY..."
+        className="glass h-20 w-full rounded-md border-[1px] border-white
+        px-[60px] text-2xl font-extralight tracking-widest text-white
+        drop-shadow-md placeholder:text-xl 
+        placeholder:text-white focus-visible:outline-none"
       />
     </div>
   );

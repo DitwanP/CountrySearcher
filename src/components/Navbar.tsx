@@ -1,5 +1,5 @@
 import CrescentMoon from "../assets/images/crescent-moon.svg";
-import Sun from "../assets/images/sun.svg";
+import Sun from "../assets/images/sun-white.svg";
 import Globe from "../assets/images/globe.svg";
 
 interface NavbarProps {
@@ -10,8 +10,8 @@ interface NavbarProps {
 const Navbar = (props: NavbarProps) => {
   const { isDarkMode, setIsDarkMode } = props;
   return (
-    <div className="fixed top-0 z-20 h-[95px] w-full bg-white px-8 shadow-md">
-      <div className="mx-auto flex h-[95px] max-w-screen-2xl items-center justify-between">
+    <div className="glass fixed top-0 z-50 h-[80px] w-full px-14 shadow-md">
+      <div className="mx-auto flex h-full max-w-screen-2xl items-center justify-between">
         <div className="flex items-center justify-center">
           <img
             src={Globe}
@@ -23,8 +23,8 @@ const Navbar = (props: NavbarProps) => {
           <button
             onClick={() => setIsDarkMode(!isDarkMode)}
             className="no-tap-highlighting flex h-16 items-center justify-center 
-            gap-3 focus-visible:border-2 focus-visible:border-very-dark-blueT
-            focus-visible:outline-none"
+            gap-3 text-white focus-visible:border-2
+            focus-visible:border-very-dark-blueT focus-visible:outline-none"
           >
             {isDarkMode && (
               <img
@@ -39,17 +39,6 @@ const Navbar = (props: NavbarProps) => {
                 alt="Crescent Moon Icon"
                 className="fade-in h-8 w-8 md:h-10 md:w-10"
               />
-            )}
-
-            {isDarkMode && (
-              <span className="fade-in text-[16px] font-normal text-very-dark-blueT">
-                Light Mode
-              </span>
-            )}
-            {!isDarkMode && (
-              <span className="fade-in text-[16px] font-normal text-very-dark-blueT">
-                Dark Mode
-              </span>
             )}
           </button>
         </div>

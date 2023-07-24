@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import { Country } from "./Interfaces";
-import { CountryListProps } from "../components/CountryList";
+import { Country } from "../Interfaces";
+import { FilterSet } from "../Types";
 
-interface UseMutatCountriesProps extends CountryListProps {
+interface UseMutateCountriesProps {
+  userSearchInput: string;
+  filters: FilterSet;
   allCountriesInfo: Country[];
 }
 
-export function useMutateCountries(props: UseMutatCountriesProps) {
+export function useMutateCountries(props: UseMutateCountriesProps) {
   const { userSearchInput, filters, allCountriesInfo } = props;
   const [queriedCountries, setQueriedCountries] = useState(allCountriesInfo);
 
@@ -16,7 +18,11 @@ export function useMutateCountries(props: UseMutatCountriesProps) {
     // Filter by search if there is user input
     if (userSearchInput) {
       newCountriesList = allCountriesInfo.filter((country) => {
-        return country.name.toLowerCase().startsWith(userSearchInput);
+        return country.name
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .startsWith(userSearchInput.toLowerCase());
       });
     } else {
       newCountriesList = allCountriesInfo;

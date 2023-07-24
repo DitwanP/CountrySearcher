@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
 import { Country, DialogProps } from "../utilities/Interfaces";
 import LeftArrow from "../assets/images/left-arrow.svg";
+import LeftArrowWhite from "../assets/images/left-arrow-white.svg";
 import getCountryFromCode from "../utilities/functions/getCountriesFromCode";
 
-const DetailsDialog = ({ isOpen, setDialogInfo, country }: DialogProps) => {
+const DetailsDialog = ({
+  isOpen,
+  isDarkMode,
+  setDialogInfo,
+  country,
+}: DialogProps) => {
   const [currentCountry, setCurrentCountry] = useState<Country>(
     country as Country
   );
@@ -41,8 +47,8 @@ const DetailsDialog = ({ isOpen, setDialogInfo, country }: DialogProps) => {
     <dialog
       id="details-dialog"
       open={isOpen}
-      className="fixed top-[95px] z-20 mb-24 h-[calc(100dvh-95px)] w-full 
-    bg-gray-200 transition-all"
+      className="glass fixed top-[80px] z-20 mb-24 h-[calc(100dvh-80px)] w-full
+      text-white backdrop-blur-3xl transition-all"
     >
       <div
         className="flex h-full w-full flex-col items-center justify-start 
@@ -52,10 +58,14 @@ const DetailsDialog = ({ isOpen, setDialogInfo, country }: DialogProps) => {
           <button
             onClick={goBack}
             className="mb-16 flex h-20 items-center justify-start gap-4 rounded-md
-            bg-white px-10 text-white shadow-xl hover:bg-gray-200"
+            border-[1px] border-white bg-transparent px-10 text-white shadow-xl hover:bg-gray-200"
           >
-            <img src={LeftArrow} alt="Left Arrow Icon" className="w-6" />
-            <span className="text-[14px] text-very-dark-blueT">Back</span>
+            <img
+              src={isDarkMode ? LeftArrowWhite : LeftArrow}
+              alt="Left Arrow Icon"
+              className="w-6"
+            />
+            <span className="text-[14px] text-white">Back</span>
           </button>
         </div>
         <img
@@ -65,63 +75,59 @@ const DetailsDialog = ({ isOpen, setDialogInfo, country }: DialogProps) => {
           transition-transform duration-500 ease-out xl:group-hover:scale-125"
         />
         <div className="flex w-full flex-col justify-start">
-          <p className="mb-8 text-4.5xl font-bold text-very-dark-blueT">
-            {currentCountry?.name}
+          <p className="mb-8 text-4.5xl font-extralight tracking-[0.2em]">
+            {currentCountry?.name
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+              .toUpperCase()}
           </p>
           <p className="mb-4 text-[16px] font-semibold transition-transform">
             Native Name:{" "}
-            <span className="text-[16px] font-normal text-dark-blue">
+            <span className="text-[16px] font-normal ">
               {currentCountry?.nativeName}
             </span>
           </p>
           <p className="mb-4 text-[16px] font-semibold transition-transform">
             Population:{" "}
-            <span className="text-[16px] font-normal text-dark-blue">
+            <span className="text-[16px] font-normal ">
               {currentCountry?.population.toLocaleString()}
             </span>
           </p>
           <p className="mb-4 text-[16px] font-semibold transition-transform">
             Region:{" "}
-            <span className="text-[16px] font-normal text-dark-blue">
+            <span className="text-[16px] font-normal ">
               {currentCountry?.region}
             </span>
           </p>
           <p className="mb-4 text-[16px] font-semibold transition-transform">
             Sub Region:{" "}
-            <span className="text-[16px] font-normal text-dark-blue">
+            <span className="text-[16px] font-normal ">
               {currentCountry?.subregion}
             </span>
           </p>
           <p className="mb-12 text-[16px] font-semibold transition-transform">
             Capital:{" "}
             {!currentCountry?.currencies ? (
-              <span className="text-[16px] font-normal text-dark-blue">
-                N/A
-              </span>
+              <span className="text-[16px] font-normal ">N/A</span>
             ) : (
-              <span className="text-[16px] font-normal text-dark-blue">
+              <span className="text-[16px] font-normal ">
                 {currentCountry?.capital}
               </span>
             )}
           </p>
           <p className="mb-4 text-[16px] font-semibold transition-transform">
             Top Level Domain:{" "}
-            <span className="text-[16px] font-normal text-dark-blue">
+            <span className="text-[16px] font-normal ">
               {currentCountry?.topLevelDomain}
             </span>
           </p>
           <p className="mb-4 text-[16px] font-semibold transition-transform">
             Currencies:{" "}
             {!currentCountry?.currencies && (
-              <span className="text-[16px] font-normal text-dark-blue">
-                N/A
-              </span>
+              <span className="text-[16px] font-normal ">N/A</span>
             )}
             {currentCountry?.currencies?.map((currency, index) => (
-              <span
-                className="text-[16px] font-normal text-dark-blue"
-                key={index}
-              >
+              <span className="text-[16px] font-normal " key={index}>
                 {currency.name}
                 {currentCountry?.currencies &&
                 index !== currentCountry.currencies.length - 1
@@ -133,10 +139,7 @@ const DetailsDialog = ({ isOpen, setDialogInfo, country }: DialogProps) => {
           <p className="mb-12 text-[16px] font-semibold transition-transform">
             Languages:{" "}
             {currentCountry?.languages?.map((currency, index) => (
-              <span
-                className="text-[16px] font-normal text-dark-blue"
-                key={index}
-              >
+              <span className="text-[16px] font-normal " key={index}>
                 {currency.name}
                 {currentCountry?.languages &&
                 index !== currentCountry.languages.length - 1
@@ -145,12 +148,10 @@ const DetailsDialog = ({ isOpen, setDialogInfo, country }: DialogProps) => {
               </span>
             ))}
           </p>
-          <p className="mb-4 text-3xl font-semibold transition-transform">
+          <p className="mb-4 text-3xl font-semibold  transition-transform">
             Border Countries:{" "}
             {!currentCountry?.borders && (
-              <span className="text-[16px] font-normal text-dark-blue">
-                N/A
-              </span>
+              <span className="text-[16px] font-normal ">N/A</span>
             )}
             <br />
             <span className="mt-8 flex w-full flex-wrap gap-6">
@@ -158,8 +159,8 @@ const DetailsDialog = ({ isOpen, setDialogInfo, country }: DialogProps) => {
                 <button
                   key={index}
                   onClick={() => changeCountry(border)}
-                  className="flex w-40 items-center justify-center rounded-sm bg-white 
-                  px-12 py-3 text-xl font-normal text-dark-blue"
+                  className="flex w-40 items-center justify-center rounded-md border-[1px] 
+                  border-white bg-transparent px-12 py-3 text-xl font-normal text-white"
                 >
                   {border}
                 </button>

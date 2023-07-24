@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FilterSet } from "./utilities/Types";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -17,18 +17,27 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="bg-slate-300">
+      <div className="custom-bg-gradient">
         <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-        <div
-          className="mx-auto mt-[95px] flex h-full min-h-[calc(100vh-95px)] w-full max-w-[400px] 
-          flex-col gap-14 px-8 py-20 sm:max-w-screen-2xl md:gap-[60px]
-          md:px-10 md:pt-24 2xl:px-0"
-        >
-          <div className="flex w-full flex-col justify-between gap-14 sm:flex-row">
-            <SearchInput setUserSearchInput={setUserSearchInput} />
-            <FilterInput filterState={filters} filterStateSetter={setFilters} />
+        <div className="z-30 mb-14 flex w-full px-14 pb-2 pt-[115px] sm:max-w-screen-2xl md:gap-[60px] md:px-14 2xl:px-0">
+          <div className="flex w-full max-w-[400px] flex-col justify-between gap-8 sm:flex-row md:max-w-none">
+            <SearchInput
+              setUserSearchInput={setUserSearchInput}
+              isDarkMode={isDarkMode}
+            />
+            <FilterInput
+              filterState={filters}
+              filterStateSetter={setFilters}
+              isDarkMode={isDarkMode}
+            />
           </div>
-          <CountryList userSearchInput={userSearchInput} filters={filters} />
+        </div>
+        <div className="flex h-full min-h-[100dvh] w-full overflow-hidden px-14">
+          <CountryList
+            userSearchInput={userSearchInput}
+            filters={filters}
+            isDarkMode={isDarkMode}
+          />
         </div>
       </div>
     </QueryClientProvider>
