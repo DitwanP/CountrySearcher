@@ -17,9 +17,9 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="custom-bg-gradient">
+      <div className="custom-bg-gradient overflow-hidden">
         <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-        <div className="z-30 mb-14 flex w-full px-14 pb-2 pt-[115px] sm:max-w-screen-2xl md:gap-[60px] md:px-14 2xl:px-0">
+        <div className="z-30 mb-20 flex w-full px-14 pt-[115px] sm:max-w-screen-2xl md:gap-[60px] md:px-14 2xl:px-0">
           <div className="flex w-full max-w-[400px] flex-col justify-between gap-8 sm:flex-row md:max-w-none">
             <SearchInput
               setUserSearchInput={setUserSearchInput}
@@ -32,7 +32,7 @@ function App() {
             />
           </div>
         </div>
-        <div className="flex h-full min-h-[100dvh] w-full overflow-hidden px-14">
+        <div className="flex h-full min-h-[100dvh] w-full overflow-y-auto px-14">
           <CountryList
             userSearchInput={userSearchInput}
             filters={filters}

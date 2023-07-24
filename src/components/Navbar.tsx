@@ -1,6 +1,7 @@
 import CrescentMoon from "../assets/images/crescent-moon.svg";
 import Sun from "../assets/images/sun-white.svg";
 import Globe from "../assets/images/globe.svg";
+import GlobeWhite from "../assets/images/globe-white.svg";
 
 interface NavbarProps {
   isDarkMode: boolean;
@@ -14,9 +15,9 @@ const Navbar = (props: NavbarProps) => {
       <div className="mx-auto flex h-full max-w-screen-2xl items-center justify-between">
         <div className="flex items-center justify-center">
           <img
-            src={Globe}
+            src={isDarkMode ? GlobeWhite : Globe}
             alt="Crescent Moon Icon"
-            className="h-10 w-10 md:h-14 md:w-14"
+            className="h-10 w-10 md:h-12 md:w-12"
           />
         </div>
         <div className="flex h-full items-center transition-all">

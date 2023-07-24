@@ -70,8 +70,8 @@ const CountryList = (props: CountryListProps) => {
   return (
     <div
       ref={countryListRef}
-      className="flex w-full flex-col items-center justify-start gap-x-2 gap-y-14
-      sm:flex-row sm:flex-wrap sm:justify-between"
+      className="flex w-full flex-col items-center justify-start gap-14
+      sm:flex-row sm:flex-wrap sm:justify-center"
     >
       {isFetching
         ? [...Array(cardsPerPage)].map((_e, i) => (

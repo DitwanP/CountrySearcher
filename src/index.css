@@ -16,6 +16,7 @@ body {
   padding: 0px;
   overflow: hidden auto;
   font-family: Nunito Sans, sans-serif;
+  background-color: black;
 }
 
 body.modal-open {
@@ -23,17 +24,28 @@ body.modal-open {
   overflow-y: hidden;
 }
 
-p,
-span,
-button,
-input {
-  letter-spacing: 0.035em;
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: white black;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: black;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 5px;
 }
 
 .custom-bg-gradient {
-  background: #232526;
-  background: -webkit-linear-gradient(to left, #414345, #232526);
-  background: linear-gradient(to left, #414345, #232526);
+  background: black;
 }
 
 .glass {
