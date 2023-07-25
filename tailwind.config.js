@@ -16,6 +16,9 @@ export default {
       fontSize: {
         "4.5xl": "2.6rem",
       },
+      screens: {
+        md2: "920px",
+      },
     },
   },
   plugins: [],

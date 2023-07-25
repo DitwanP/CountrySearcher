@@ -36,7 +36,7 @@ const FilterInput = ({
         className="no-tap-highlighting glass flex h-full items-center justify-between
           rounded-md border-[1px] border-white px-8 text-xl font-extralight 
           tracking-widest text-white drop-shadow-md transition-transform duration-300 focus-visible:outline-none 
-          md:w-[280px]"
+          md:max-w-[250px]"
       >
         FILTER BY REGION
         <img
@@ -49,8 +49,7 @@ const FilterInput = ({
       </button>
       <div
         className={`glass absolute top-[65px] flex h-0 w-full transform-gpu flex-col
-            justify-between overflow-hidden rounded-md px-8
-            drop-shadow-2xl transition-all duration-[400ms]
+            justify-between overflow-hidden rounded-md px-8 drop-shadow-2xl transition-all duration-[400ms]
             ease-in-out
             ${
               isMenuOpen &&

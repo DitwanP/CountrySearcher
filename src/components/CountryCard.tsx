@@ -27,26 +27,26 @@ const CountryCard = (props: CountryCardProps) => {
     <div
       ref={lastCountryRef}
       onClick={openDialog}
-      className="group relative flex h-[460px] w-full flex-grow transform-gpu
-      flex-col overflow-hidden rounded-md border-[1px] transition-all duration-300 ease-in sm:pointer-events-auto sm:max-w-[400px] xl:border-white xl:hover:cursor-pointer xl:hover:shadow-2xl"
+      className="group relative flex h-[450px] w-full transform-gpu flex-col overflow-hidden
+      rounded-md border-[1px] transition-all duration-300 ease-in sm:pointer-events-auto sm:max-w-[400px] sm:basis-[48.5%] md2:basis-[32%] xl:basis-[24%] xl:border-white xl:hover:cursor-pointer xl:hover:shadow-2xl"
     >
       {/* Transparent Overlay */}
 
-      <div className="relative z-20 flex w-full flex-grow flex-col items-center justify-center gap-6 p-8 text-center text-white">
+      <div className="relative z-20 flex h-full w-full flex-col items-center justify-center gap-6 p-8 text-center text-white">
         <div
           className={`absolute h-full w-full rounded-md ${
-            isDarkMode ? "bg-[#000000]" : "bg-[#d9d9d9]"
+            isDarkMode ? "bg-[#272626]" : "bg-[#d9d9d9]"
           }`}
         >
           <img
             src={countryInfo.flag}
             alt={`${countryInfo.name}'s flag`}
             className="fade-in h-full w-full transform-gpu rounded-md
-            object-cover blur-[50px] brightness-75 grayscale-[.5]"
+            object-cover blur-[45px] brightness-50 grayscale-[.3]"
           />
         </div>
 
-        <div className="z-30 flex flex-col items-center justify-center">
+        <div className="z-30 flex w-full flex-col items-center justify-center">
           <span className="text-4xl font-extralight leading-tight tracking-[0.2em] transition-transform duration-300 ease-out xl:group-hover:-translate-y-4">
             {countryInfo.name
               .normalize("NFD")
@@ -54,24 +54,24 @@ const CountryCard = (props: CountryCardProps) => {
               .toUpperCase()}
           </span>
 
-          <div className="my-4 h-[1px] w-1/2 bg-white transition-transform duration-300 ease-out xl:group-hover:-translate-y-4"></div>
+          <div className="my-8 h-[1px] w-1/4 bg-white transition-transform duration-300 ease-out xl:group-hover:-translate-y-4"></div>
 
-          <div className="flex w-full flex-col items-center gap-6">
-            <p className="text-3xl font-normal tracking-wider transition-transform duration-300 xl:group-hover:-translate-y-4">
+          <div className="flex w-full flex-col items-center gap-10">
+            <p className="text-3xl font-normal tracking-widest transition-transform duration-300 xl:group-hover:-translate-y-4">
               capital{": "}
               <br />
               <span className="text-3xl font-extralight tracking-widest">
                 {countryInfo.capital?.toUpperCase() || "N/A"}
               </span>
             </p>
-            <p className="text-3xl font-normal tracking-wider transition-transform duration-300 ease-out xl:group-hover:-translate-y-4">
+            <p className="text-3xl font-normal tracking-widest transition-transform duration-300 ease-out xl:group-hover:-translate-y-4">
               region{": "}
               <br />
               <span className="text-3xl font-extralight tracking-widest">
                 {countryInfo.region.toUpperCase()}
               </span>
             </p>
-            <p className="text-3xl font-normal tracking-wider transition-transform duration-300 ease-out xl:group-hover:-translate-y-4">
+            <p className="text-3xl font-normal tracking-widest transition-transform duration-300 ease-out xl:group-hover:-translate-y-4">
               population{": "}
               <br />
               <span className="text-3xl font-extralight tracking-widest">
@@ -93,13 +93,13 @@ const CountryCard = (props: CountryCardProps) => {
   ) : (
     <div
       ref={lastCountryRef}
-      className="group relative flex h-[460px] w-full flex-grow transform-gpu
-      flex-col overflow-hidden rounded-md border-[1px] transition-all duration-300 ease-in sm:pointer-events-auto sm:max-w-[320px] xl:border-white"
+      className="group relative flex h-[450px] w-full transform-gpu flex-col overflow-hidden
+      rounded-md border-[1px] transition-all duration-300 ease-in sm:pointer-events-auto sm:max-w-[400px] sm:basis-[48%] md2:basis-[32%] xl:basis-[24%] xl:border-white xl:hover:cursor-pointer xl:hover:shadow-2xl"
     >
       {/* !!!!FIX SKELETON POSITIONS */}
       <SkeletonTheme
-        baseColor="#2b3945"
-        highlightColor="#344554"
+        baseColor="#1c1c1c"
+        highlightColor="#303030"
         duration={1.5}
       >
         <div className="flex flex-col gap-4">

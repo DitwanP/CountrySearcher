@@ -19,25 +19,27 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <div className="custom-bg-gradient overflow-hidden">
         <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-        <div className="z-30 mb-20 flex w-full px-14 pt-[115px] sm:max-w-screen-2xl md:gap-[60px] md:px-14 2xl:px-0">
-          <div className="flex w-full max-w-[400px] flex-col justify-between gap-8 sm:flex-row md:max-w-none">
-            <SearchInput
-              setUserSearchInput={setUserSearchInput}
-              isDarkMode={isDarkMode}
-            />
-            <FilterInput
-              filterState={filters}
-              filterStateSetter={setFilters}
+        <div className="px-14">
+          <div className="z-30 mx-auto mb-20 flex w-full pt-[115px] sm:max-w-screen-2xl md:gap-[60px] 2xl:px-0">
+            <div className="flex w-full flex-col justify-between gap-8 sm:flex-row">
+              <SearchInput
+                setUserSearchInput={setUserSearchInput}
+                isDarkMode={isDarkMode}
+              />
+              <FilterInput
+                filterState={filters}
+                filterStateSetter={setFilters}
+                isDarkMode={isDarkMode}
+              />
+            </div>
+          </div>
+          <div className="mx-auto flex h-full w-full overflow-y-auto sm:max-w-screen-2xl 2xl:px-0">
+            <CountryList
+              userSearchInput={userSearchInput}
+              filters={filters}
               isDarkMode={isDarkMode}
             />
           </div>
-        </div>
-        <div className="flex h-full min-h-[100dvh] w-full overflow-y-auto px-14">
-          <CountryList
-            userSearchInput={userSearchInput}
-            filters={filters}
-            isDarkMode={isDarkMode}
-          />
         </div>
       </div>
     </QueryClientProvider>

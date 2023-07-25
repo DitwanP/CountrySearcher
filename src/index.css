@@ -48,6 +48,11 @@ body.modal-open {
   background: black;
 }
 
+.test {
+  background-color: #1c1c1c;
+  background-color: #303030;
+}
+
 .glass {
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(20px);
