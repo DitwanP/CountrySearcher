@@ -33,7 +33,7 @@ function App() {
               />
             </div>
           </div>
-          <div className="mx-auto flex h-full w-full overflow-y-auto sm:max-w-screen-2xl 2xl:px-0">
+          <div className="mx-auto h-full w-full overflow-y-auto sm:max-w-screen-2xl 2xl:px-0">
             <CountryList
               userSearchInput={userSearchInput}
               filters={filters}

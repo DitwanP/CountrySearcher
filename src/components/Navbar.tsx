@@ -25,7 +25,7 @@ const Navbar = (props: NavbarProps) => {
             onClick={() => setIsDarkMode(!isDarkMode)}
             className="no-tap-highlighting flex h-16 items-center justify-center 
             gap-3 text-white focus-visible:border-2
-            focus-visible:border-very-dark-blueT focus-visible:outline-none"
+            focus-visible:border-blue-300 focus-visible:outline-none"
           >
             {isDarkMode && (
               <img

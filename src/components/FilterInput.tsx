@@ -21,8 +21,9 @@ const FilterInput = ({
   const dropdownOptions = regions.map((region, index) => {
     return (
       <Option
-        region={region}
         key={index}
+        region={region}
+        isMenuOpen={isMenuOpen}
         filterState={filterState}
         filterStateSetter={filterStateSetter}
       />
@@ -33,10 +34,10 @@ const FilterInput = ({
     <div className="relative z-10 flex h-20 min-w-[200px] flex-col gap-1 text-white">
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="no-tap-highlighting glass flex h-full items-center justify-between
-          rounded-md border-[1px] border-white px-8 text-xl font-extralight 
-          tracking-widest text-white drop-shadow-md transition-transform duration-300 focus-visible:outline-none 
-          md:max-w-[250px]"
+        aria-label="Region filter dropdown menu toggle"
+        className="no-tap-highlighting glass flex h-full items-center justify-between gap-14
+          rounded-md border-[1px] border-white px-8 text-2xl font-light tracking-widest
+        text-white drop-shadow-md transition-transform duration-300 md:max-w-[250px]"
       >
         FILTER BY REGION
         <img
@@ -64,12 +65,13 @@ const FilterInput = ({
 
 interface OptionProps {
   region: string;
+  isMenuOpen: boolean;
   filterState: FilterSet;
   filterStateSetter: React.Dispatch<React.SetStateAction<FilterSet>>;
 }
 
 const Option = (props: OptionProps) => {
-  const { region, filterState, filterStateSetter } = props;
+  const { region, isMenuOpen, filterState, filterStateSetter } = props;
   const formattedRegion = region[0].toUpperCase() + region.slice(1);
 
   const handleFilterChange = () => {
@@ -85,22 +87,24 @@ const Option = (props: OptionProps) => {
   };
 
   return (
-    <button
-      onClick={handleFilterChange}
-      className="my-3 flex items-center justify-between text-[16px]"
-    >
-      <label htmlFor={region} className="text-[16px] tracking-[0.2em]">
+    <div className="flex justify-between">
+      <label
+        htmlFor={region}
+        className="text-[16px] font-light tracking-widest"
+      >
         {formattedRegion.toUpperCase()}
       </label>
       <input
         type="checkbox"
         id={region}
-        checked={filterState.has(region)}
+        tabIndex={isMenuOpen ? 0 : -1}
+        aria-label={`Region filter option for ${formattedRegion}`}
         onChange={handleFilterChange}
+        checked={filterState.has(region)}
         className="h-8 w-8 appearance-none rounded-md border-[1px] border-white checked:bg-white
         hover:cursor-pointer"
       />
-    </button>
+    </div>
   );
 };
 

@@ -8,6 +8,7 @@ import CountryData from "../assets/data/country-data.json";
 import CountryCard from "../components/CountryCard";
 import getCountries from "../utilities/functions/getCountries";
 import DetailsDialog from "./DetailsDialog";
+import Loader from "./Loader";
 
 const allCountriesInfo: Country[] = CountryData;
 export interface CountryListProps {
@@ -70,28 +71,30 @@ const CountryList = (props: CountryListProps) => {
       ref={countryListRef}
       className="grid w-full gap-12 sm:grid-cols-2 md2:grid-cols-3 xl:grid-cols-4"
     >
-      {isFetching
-        ? [...Array(cardsPerPage)].map((_e, i) => (
-            <CountryCard key={i} isDarkMode={isDarkMode} />
-          ))
-        : currentCountriesInfo?.map((country, i) => {
-            return i === currentCountriesInfo.length - 1 ? (
-              <CountryCard
-                key={i}
-                isDarkMode={isDarkMode}
-                countryInfo={country}
-                lastCountryRef={ref}
-                setDialogInfo={setDialogInfo}
-              />
-            ) : (
-              <CountryCard
-                key={i}
-                isDarkMode={isDarkMode}
-                countryInfo={country}
-                setDialogInfo={setDialogInfo}
-              />
-            );
-          })}
+      {isFetching ? (
+        <div className="absolute left-0 mt-64 flex w-full justify-center">
+          <Loader />
+        </div>
+      ) : (
+        currentCountriesInfo?.map((country, i) => {
+          return i === currentCountriesInfo.length - 1 ? (
+            <CountryCard
+              key={i}
+              isDarkMode={isDarkMode}
+              countryInfo={country}
+              lastCountryRef={ref}
+              setDialogInfo={setDialogInfo}
+            />
+          ) : (
+            <CountryCard
+              key={i}
+              isDarkMode={isDarkMode}
+              countryInfo={country}
+              setDialogInfo={setDialogInfo}
+            />
+          );
+        })
+      )}
       {dialogInfo.isOpen && (
         <DetailsDialog
           isOpen={dialogInfo.isOpen}

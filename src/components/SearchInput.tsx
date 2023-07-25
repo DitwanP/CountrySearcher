@@ -25,10 +25,10 @@ const SearchInput = ({ isDarkMode, setUserSearchInput }: SearchInputProps) => {
         id="countrySearchInput"
         onChange={handleInput}
         placeholder="SEARCH FOR A COUNTRY..."
+        aria-label="Country search text input"
         className="glass h-20 w-full rounded-md border-[1px] border-white
-        px-[60px] text-2xl font-extralight tracking-widest text-white
-        drop-shadow-md placeholder:text-xl 
-        placeholder:text-white focus-visible:outline-none"
+        px-[60px] text-3xl font-light tracking-widest text-white
+        drop-shadow-md placeholder:text-2xl placeholder:text-white"
       />
     </div>
   );
