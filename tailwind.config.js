@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
+
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: "class",
   theme: {
     fontFamily: {
       "nunito-sans": ["Nunito Sans", "sans-serif"],
@@ -18,6 +20,12 @@ export default {
       },
       screens: {
         md2: "920px",
+      },
+      colors: {
+        "main-light": "#231f22",
+        "main-dark": "#e3e2e6",
+        "dark-mode": "#1f2220",
+        "light-mode": "#e3e2e6",
       },
     },
   },

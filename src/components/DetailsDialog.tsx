@@ -6,7 +6,7 @@ import getCountryFromCode from "../utilities/functions/getCountriesFromCode";
 
 const DetailsDialog = ({
   isOpen,
-  isDarkMode,
+  theme,
   setDialogInfo,
   country,
 }: DialogProps) => {
@@ -39,7 +39,6 @@ const DetailsDialog = ({
   };
 
   useEffect(() => {
-    console.log("In dialog!!");
     document.body.setAttribute("class", "modal-open");
   }, [isOpen]);
 
@@ -48,7 +47,7 @@ const DetailsDialog = ({
       id="details-dialog"
       open={isOpen}
       className="glass fixed top-[80px] z-20 mb-24 h-[calc(100dvh-80px)] w-full
-      text-white backdrop-blur-3xl transition-all"
+      text-main-light backdrop-blur-3xl transition-all"
     >
       <div
         className="flex h-full w-full flex-col items-center justify-start 
@@ -57,21 +56,21 @@ const DetailsDialog = ({
         <div className="w-full">
           <button
             onClick={goBack}
-            className="mb-16 flex h-20 items-center justify-start gap-4 rounded-md
-            border-[1px] border-white bg-transparent px-10 text-white shadow-xl hover:bg-gray-200"
+            className="border-temp custom-border mb-16 flex h-20 items-center justify-start
+            gap-4 rounded-lg bg-transparent px-10 text-main-light shadow-xl hover:bg-gray-200"
           >
             <img
-              src={isDarkMode ? LeftArrowWhite : LeftArrow}
+              src={theme === "dark" ? LeftArrowWhite : LeftArrow}
               alt="Left Arrow Icon"
               className="w-6"
             />
-            <span className="text-[14px] text-white">Back</span>
+            <span className="text-[14px] text-main-light">Back</span>
           </button>
         </div>
         <img
           src={currentCountry?.flag}
           alt={`${currentCountry?.name}'s flag`}
-          className="fade-in mb-16 h-[250px] w-full rounded-md object-cover shadow-xl
+          className="fade-in mb-16 h-[250px] w-full rounded-lg object-cover shadow-xl
           transition-transform duration-500 ease-out xl:group-hover:scale-125"
         />
         <div className="flex w-full flex-col justify-start">
@@ -159,8 +158,8 @@ const DetailsDialog = ({
                 <button
                   key={index}
                   onClick={() => changeCountry(border)}
-                  className="flex w-40 items-center justify-center rounded-md border-[1px] 
-                  border-white bg-transparent px-12 py-3 text-xl font-normal text-white"
+                  className="border-temp custom-border flex w-40 items-center justify-center 
+                  rounded-lg bg-transparent px-12 py-3 text-xl font-normal text-main-light"
                 >
                   {border}
                 </button>

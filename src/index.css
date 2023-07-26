@@ -1,15 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@property --border-angle {
-  syntax: "<angle>";
-  inherits: true;
-  initial-value: 0turn;
-}
 
 * {
   box-sizing: border-box;
   font-size: 62.5%;
+}
+
+:root {
+  --cell-color: black;
 }
 
 html,
@@ -49,8 +48,26 @@ body.modal-open {
   border-radius: 5px;
 }
 
-.custom-bg-gradient {
-  background: black;
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+div:focus-visible {
+  outline: none;
+  border: 3px solid rgb(89, 157, 252);
+}
+
+.custom-bg {
+  background-color: #e3e2e6;
+}
+
+.custom-border {
+  border: 1px solid #231f22;
+}
+
+.custom-shadow {
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.04), 0 2px 2px rgba(0, 0, 0, 0.04),
+    0 4px 4px rgba(0, 0, 0, 0.04), 0 6px 8px rgba(0, 0, 0, 0.04),
+    0 8px 16px rgba(0, 0, 0, 0.04);
 }
 
 .test {
@@ -59,8 +76,8 @@ body.modal-open {
 }
 
 .glass {
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(80px);
 }
 
 .no-tap-highlighting {
@@ -76,7 +93,7 @@ body.modal-open {
 
 .fade-in {
   opacity: 0;
-  animation: fade-in 0.7s ease-in forwards;
+  animation: fade-in 0.5s ease-in forwards;
 }
 
 .slide-up {
@@ -99,13 +116,12 @@ body.modal-open {
   height: var(--total-size);
 }
 .mosaic-loader > .cell {
-  --cell-color: white;
   flex: 0 0 var(--cell-size);
   height: 20px;
   margin: 2px;
   background-color: transparent;
   border: 1px solid var(--cell-color);
-  border-radius: 0.1rem;
+
   animation: 1.5s ripple ease infinite;
 }
 .mosaic-loader > .cell.d-1 {

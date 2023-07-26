@@ -14,7 +14,7 @@ const allCountriesInfo: Country[] = CountryData;
 export interface CountryListProps {
   userSearchInput: string;
   filters: FilterSet;
-  isDarkMode: boolean;
+  theme: string;
 }
 
 const defaultDialogState: DialogStateInterface = {
@@ -23,7 +23,7 @@ const defaultDialogState: DialogStateInterface = {
 };
 
 const CountryList = (props: CountryListProps) => {
-  const { userSearchInput, filters, isDarkMode } = props;
+  const { userSearchInput, filters, theme } = props;
   const cardsPerPage = 16;
   const [isInitialFetch, setIsInitialFetch] = useState(true);
   const [dialogInfo, setDialogInfo] = useState(defaultDialogState);
@@ -73,14 +73,14 @@ const CountryList = (props: CountryListProps) => {
     >
       {isFetching ? (
         <div className="absolute left-0 mt-64 flex w-full justify-center">
-          <Loader />
+          <Loader theme={theme} />
         </div>
       ) : (
         currentCountriesInfo?.map((country, i) => {
           return i === currentCountriesInfo.length - 1 ? (
             <CountryCard
               key={i}
-              isDarkMode={isDarkMode}
+              theme={theme}
               countryInfo={country}
               lastCountryRef={ref}
               setDialogInfo={setDialogInfo}
@@ -88,7 +88,7 @@ const CountryList = (props: CountryListProps) => {
           ) : (
             <CountryCard
               key={i}
-              isDarkMode={isDarkMode}
+              theme={theme}
               countryInfo={country}
               setDialogInfo={setDialogInfo}
             />
@@ -98,7 +98,7 @@ const CountryList = (props: CountryListProps) => {
       {dialogInfo.isOpen && (
         <DetailsDialog
           isOpen={dialogInfo.isOpen}
-          isDarkMode={isDarkMode}
+          theme={theme}
           setDialogInfo={setDialogInfo}
           country={dialogInfo.country}
         />
