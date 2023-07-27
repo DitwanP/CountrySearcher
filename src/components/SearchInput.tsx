@@ -12,7 +12,14 @@ const SearchInput = ({ theme, setUserSearchInput }: SearchInputProps) => {
   };
 
   return (
-    <div className="relative z-0 w-full md:max-w-[480px]">
+    <div className="custom-shadow relative h-24 w-full overflow-hidden rounded-lg border-2 border-black dark:border-white md:max-w-[480px]">
+      <div
+        className={`absolute left-[0px] h-full w-full ${
+          theme === "dark"
+            ? "custom-button-gradient-dark"
+            : "custom-button-gradient-light"
+        }`}
+      ></div>
       <label htmlFor="countrySearchInput">
         <img
           src={theme === "dark" ? MagnifyingGlassWhite : MagnifyingGlass}
@@ -26,9 +33,9 @@ const SearchInput = ({ theme, setUserSearchInput }: SearchInputProps) => {
         onChange={handleInput}
         placeholder="Search for a country..."
         aria-label="Country search text input"
-        className="custom-shadow custom-border h-20 w-full rounded-lg bg-light-mode bg-transparent px-[60px]
-        text-3xl font-normal tracking-widest text-main-light drop-shadow-md placeholder:text-2xl
-        placeholder:text-main-light dark:bg-dark-mode dark:text-main-dark placeholder:dark:text-main-dark"
+        className="dark:bg-dark-mode-bg-400 absolute h-full w-full bg-white bg-opacity-5 px-[55px] text-3xl font-normal
+          tracking-wide text-black placeholder:text-2xl placeholder:text-black 
+          dark:bg-opacity-5 dark:text-white placeholder:dark:text-white"
       />
     </div>
   );

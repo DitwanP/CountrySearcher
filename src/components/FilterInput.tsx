@@ -31,27 +31,36 @@ const FilterInput = ({
   });
 
   return (
-    <div className="relative z-10 flex h-20 min-w-[200px] flex-col gap-1 text-main-light">
-      <button
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-        aria-label="Region filter dropdown menu toggle"
-        className="no-tap-highlighting custom-border custom-shadow flex h-full items-center justify-between gap-14
-        rounded-lg bg-light-mode px-8 text-2xl font-normal tracking-widest text-main-light transition-transform
-      duration-300 dark:bg-dark-mode dark:text-main-dark md:max-w-[250px]"
-      >
-        Filter by region
-        <img
-          src={theme === "dark" ? ChevronDownWhite : ChevronDown}
-          alt="Downward Chevron Icon"
-          className={`h-10 w-6 touch-none transition-transform duration-300 ${
-            isMenuOpen && "rotate-180"
+    <div className="custom-shadow group relative flex h-24 min-w-[250px] flex-col gap-1 rounded-lg text-black dark:text-white">
+      <div className="relative left-0 top-0 h-full w-full overflow-hidden rounded-lg border-2 border-black dark:border-white">
+        <div
+          className={`absolute left-[0px] h-full w-full group-hover:bg-right ${
+            theme === "dark"
+              ? "custom-button-gradient-dark"
+              : "custom-button-gradient-light"
           }`}
-        />
-      </button>
+        ></div>
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Region filter dropdown menu toggle"
+          className="no-tap-highlighting absolute flex h-full w-full items-center justify-between gap-14 overflow-hidden
+            bg-white bg-opacity-5 px-8 text-2xl font-normal tracking-widest transition-all 
+            duration-100 ease-in dark:bg-black dark:bg-opacity-5"
+        >
+          Filter by region
+          <img
+            src={theme === "dark" ? ChevronDownWhite : ChevronDown}
+            alt="Downward Chevron Icon"
+            className={`h-8 w-8 touch-none transition-transform duration-500 ${
+              isMenuOpen && "rotate-180"
+            }`}
+          />
+        </button>
+      </div>
       <div
-        className={`custom-shadow absolute top-[65px] flex h-0 w-full transform-gpu flex-col justify-between overflow-hidden rounded-lg bg-light-mode
-            px-8 text-main-light drop-shadow-2xl transition-all duration-300 ease-out dark:bg-dark-mode
-            dark:text-main-dark ${isMenuOpen && "h-[250px] py-8"}`}
+        className={`custom-shadow bg-light-mode-bg-200 dark:bg-dark-mode-bg-400 absolute top-[65px] z-30 flex h-0 w-full transform-gpu flex-col justify-between 
+        overflow-hidden rounded-lg px-8 text-black drop-shadow-2xl transition-all duration-500 ease-in-out
+        dark:text-primary-dark ${isMenuOpen && "h-[250px] py-8"}`}
       >
         {dropdownOptions}
       </div>
@@ -89,7 +98,7 @@ const Option = (props: OptionProps) => {
   };
 
   return (
-    <div className="flex justify-between transition-all duration-300">
+    <div className="flex justify-between transition-all duration-500">
       <label
         htmlFor={region}
         className="text-[16px] font-light tracking-widest"
@@ -104,7 +113,7 @@ const Option = (props: OptionProps) => {
         onChange={handleFilterChange}
         onKeyDown={handleKeyDown}
         checked={filterState.has(region)}
-        className="h-8 w-8 appearance-none rounded-sm border-[1px] border-main-light checked:bg-main-light hover:cursor-pointer dark:border-main-dark dark:checked:bg-main-dark"
+        className="h-8 w-8 appearance-none rounded-sm border-[1px] border-primary-light checked:bg-primary-light hover:cursor-pointer dark:border-primary-dark dark:checked:bg-primary-dark"
       />
     </div>
   );

@@ -36,12 +36,12 @@ const Navbar = (props: NavbarProps) => {
 
   useEffect(() => {
     if (!localStorage.getItem("theme")) {
-      localStorage.theme = "dark";
+      localStorage.theme = "light";
     }
   });
 
   return (
-    <div className="custom-shadow fixed top-0 z-50 h-[80px] w-full bg-light-mode px-14 transition-colors duration-300 ease-out dark:bg-dark-mode">
+    <div className="custom-shadow fixed top-0 z-50 h-[80px] w-full bg-light-mode-bg px-14 drop-shadow-md transition-colors duration-500 ease-out dark:bg-dark-mode-bg">
       <div className="mx-auto flex h-full max-w-screen-2xl items-center justify-between">
         <div className="flex items-center justify-center">
           <img
@@ -54,20 +54,20 @@ const Navbar = (props: NavbarProps) => {
           <button
             onClick={handleThemeToggle}
             className="no-tap-highlighting flex h-16 w-16 items-center justify-center 
-            gap-3 text-main-light focus:border-none"
+            gap-3 text-primary-light focus:border-none"
           >
             {theme === "light" && (
               <img
                 src={Sun}
                 alt="Sun Icon"
-                className="fade-in h-10 w-10 md:h-12 md:w-12"
+                className="fade-in-icon h-10 w-10 md:h-12 md:w-12"
               />
             )}
             {theme === "dark" && (
               <img
                 src={CrescentMoonWhite}
                 alt="Crescent Moon Icon"
-                className="fade-in h-8 w-8 md:h-10 md:w-10"
+                className="fade-in-icon h-8 w-8 md:h-10 md:w-10"
               />
             )}
           </button>

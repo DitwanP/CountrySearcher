@@ -46,8 +46,8 @@ const DetailsDialog = ({
     <dialog
       id="details-dialog"
       open={isOpen}
-      className="glass fixed top-[80px] z-20 mb-24 h-[calc(100dvh-80px)] w-full
-      text-main-light backdrop-blur-3xl transition-all"
+      className="glass text-primary-light fixed top-[80px] z-20 mb-24 h-[calc(100dvh-80px)]
+      w-full backdrop-blur-3xl transition-all"
     >
       <div
         className="flex h-full w-full flex-col items-center justify-start 
@@ -56,15 +56,15 @@ const DetailsDialog = ({
         <div className="w-full">
           <button
             onClick={goBack}
-            className="border-temp custom-border mb-16 flex h-20 items-center justify-start
-            gap-4 rounded-lg bg-transparent px-10 text-main-light shadow-xl hover:bg-gray-200"
+            className="border-temp custom-border text-primary-light mb-16 flex h-20 items-center
+            justify-start gap-4 rounded-lg bg-transparent px-10 shadow-xl hover:bg-gray-200"
           >
             <img
               src={theme === "dark" ? LeftArrowWhite : LeftArrow}
               alt="Left Arrow Icon"
               className="w-6"
             />
-            <span className="text-[14px] text-main-light">Back</span>
+            <span className="text-primary-light text-[14px]">Back</span>
           </button>
         </div>
         <img
@@ -158,8 +158,8 @@ const DetailsDialog = ({
                 <button
                   key={index}
                   onClick={() => changeCountry(border)}
-                  className="border-temp custom-border flex w-40 items-center justify-center 
-                  rounded-lg bg-transparent px-12 py-3 text-xl font-normal text-main-light"
+                  className="border-temp custom-border text-primary-light flex w-40 items-center 
+                  justify-center rounded-lg bg-transparent px-12 py-3 text-xl font-normal"
                 >
                   {border}
                 </button>

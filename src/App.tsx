@@ -11,13 +11,13 @@ const defaultFilterState: FilterSet = new Set();
 const queryClient = new QueryClient();
 
 function App() {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [filters, setFilters] = useState(defaultFilterState);
   const [userSearchInput, setUserSearchInput] = useState("");
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="app min-h-screen overflow-hidden bg-light-mode transition-colors duration-300 ease-out dark:bg-dark-mode">
+      <div className="app min-h-screen overflow-hidden bg-light-mode-bg transition-colors duration-500 ease-out dark:bg-dark-mode-bg">
         <Navbar theme={theme} setTheme={setTheme} />
         <div className="px-14">
           <div className="z-30 mx-auto mb-20 flex w-full pt-[115px] sm:max-w-screen-2xl md:gap-[60px] 2xl:px-0">

@@ -11,14 +11,22 @@ interface LoaderProps {
 const Loader = ({ theme }: LoaderProps) => {
   const cells = 4;
   const fullConfig = resolveConfig(tailwindConfig);
-  const lightModeBg = fullConfig.theme.colors["main-dark"];
-  const darkModeBg = fullConfig.theme.colors["main-light"];
+  const lightModeBg = fullConfig.theme.colors["primary-dark"];
+  const darkModeBg = fullConfig.theme.colors["primary-light"];
 
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.style.setProperty("--cell-color", lightModeBg);
+      document.documentElement.style.setProperty(
+        "--focus-border-color",
+        darkModeBg
+      );
     } else {
       document.documentElement.style.setProperty("--cell-color", darkModeBg);
+      document.documentElement.style.setProperty(
+        "--focus-border-color",
+        lightModeBg
+      );
     }
   }, [theme]);
 
