@@ -10,6 +10,8 @@
 :root {
   --cell-color: black;
   --focus-border-color: black;
+  --scrollbar-track-color: black;
+  --scrollbar-color: black;
 }
 
 html,
@@ -32,21 +34,28 @@ body.modal-open {
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: white black;
+  scrollbar-color: var(--scrollbar-track-color) var(--scrollbar-color);
 }
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
+  position: absolute;
 }
 
 *::-webkit-scrollbar-track {
-  background: black;
+  background: var(--scrollbar-track-color);
+  transition-property: background;
+  transition-duration: 500ms;
+  transition-timing-function: ease-out;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: white;
+  background-color: var(--scrollbar-color);
   border-radius: 5px;
+  transition-property: background-color;
+  transition-duration: 500ms;
+  transition-timing-function: ease-out;
 }
 
 a:focus-visible,
@@ -108,13 +117,6 @@ div:focus-visible {
 
 .no-tap-highlighting {
   -webkit-tap-highlight-color: transparent;
-}
-
-.flag-skeleton-container span:first-child {
-  border-top-left-radius: 0.75rem;
-  border-top-right-radius: 0.75rem;
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
 }
 
 .fade-in {

@@ -1,8 +1,7 @@
-import CrescentMoonWhite from "../assets/images/crescent-moon-white.svg";
-import Sun from "../assets/images/sun.svg";
 import Globe from "../assets/images/globe.svg";
 import GlobeWhite from "../assets/images/globe-white.svg";
 import { useEffect } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 interface NavbarProps {
   theme: string;
@@ -11,17 +10,6 @@ interface NavbarProps {
 
 const Navbar = (props: NavbarProps) => {
   const { theme, setTheme } = props;
-
-  const handleThemeToggle = () => {
-    if (theme === "dark") {
-      localStorage.theme = "light";
-      setTheme("light");
-    } else {
-      localStorage.theme = "dark";
-      setTheme("dark");
-    }
-  };
-
   useEffect(() => {
     if (
       localStorage.theme === "dark" ||
@@ -50,28 +38,7 @@ const Navbar = (props: NavbarProps) => {
             className="h-10 w-10 md:h-12 md:w-12"
           />
         </div>
-        <div className="flex h-full items-center transition-all">
-          <button
-            onClick={handleThemeToggle}
-            className="no-tap-highlighting flex h-16 w-16 items-center justify-center 
-            gap-3 text-primary-light focus:border-none"
-          >
-            {theme === "light" && (
-              <img
-                src={Sun}
-                alt="Sun Icon"
-                className="fade-in-icon h-10 w-10 md:h-12 md:w-12"
-              />
-            )}
-            {theme === "dark" && (
-              <img
-                src={CrescentMoonWhite}
-                alt="Crescent Moon Icon"
-                className="fade-in-icon h-8 w-8 md:h-10 md:w-10"
-              />
-            )}
-          </button>
-        </div>
+        <ThemeToggle theme={theme} setTheme={setTheme} />
       </div>
     </div>
   );

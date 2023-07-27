@@ -73,7 +73,7 @@ const CountryList = (props: CountryListProps) => {
     >
       {isFetching ? (
         <div className="absolute left-0 mt-64 flex w-full justify-center">
-          <Loader theme={theme} />
+          <Loader />
         </div>
       ) : (
         currentCountriesInfo?.map((country, i) => {

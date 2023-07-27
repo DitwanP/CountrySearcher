@@ -12,9 +12,9 @@ const SearchInput = ({ theme, setUserSearchInput }: SearchInputProps) => {
   };
 
   return (
-    <div className="custom-shadow relative h-24 w-full overflow-hidden rounded-lg border-2 border-black dark:border-white md:max-w-[480px]">
+    <div className="custom-shadow group relative h-24 w-full overflow-hidden rounded-lg border-2 border-black dark:border-white md:max-w-[480px]">
       <div
-        className={`absolute left-[0px] h-full w-full ${
+        className={`absolute left-[0px] h-full w-full group-hover:bg-right ${
           theme === "dark"
             ? "custom-button-gradient-dark"
             : "custom-button-gradient-light"

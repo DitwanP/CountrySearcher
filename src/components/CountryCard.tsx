@@ -34,7 +34,7 @@ const CountryCard = (props: CountryCardProps) => {
         role="button"
         aria-label="Country info card"
         title={`Info card for ${countryInfo.name}, click for details.`}
-        className="custom-shadow group relative flex h-[450px] w-full transform-gpu flex-col overflow-hidden rounded-lg border-2 border-black transition-transform duration-500 ease-in dark:border-white sm:pointer-events-auto sm:max-w-[400px] sm:basis-[48.5%] md2:basis-[32%] xl:basis-[24%] xl:hover:cursor-pointer xl:hover:shadow-2xl"
+        className="custom-shadow group relative flex h-[450px] w-full transform-gpu flex-col overflow-hidden rounded-lg border-2 border-black transition-transform duration-500 ease-out dark:border-white sm:pointer-events-auto sm:max-w-[400px] sm:basis-[48.5%] md2:basis-[32%] xl:basis-[24%] xl:hover:cursor-pointer xl:hover:shadow-2xl"
       >
         <div className="relative z-20 flex h-full w-full flex-col items-center justify-center gap-6 overflow-hidden px-8 py-10 text-center text-black transition-all duration-500 ease-out dark:text-white xl:group-focus:p-8">
           <Suspense>
@@ -60,7 +60,7 @@ const CountryCard = (props: CountryCardProps) => {
             </span>
 
             <div
-              className={`my-8 h-[1px] w-2/3 ${
+              className={`my-8 h-[1px] w-2/3 transition-colors duration-500 ease-out ${
                 theme === "dark" ? "bg-white" : "bg-black"
               }`}
             ></div>
