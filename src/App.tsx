@@ -17,10 +17,10 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="app min-h-screen overflow-hidden bg-light-mode-bg transition-colors duration-500 ease-out dark:bg-dark-mode-bg">
+      <div className="app min-h-screen overflow-hidden bg-light-mode-bg transition-colors duration-150 ease-out dark:bg-dark-mode-bg">
         <Navbar theme={theme} setTheme={setTheme} />
         <div className="px-14">
-          <div className="z-30 mx-auto mb-20 flex w-full pt-[115px] sm:max-w-screen-2xl md:gap-[60px] 2xl:px-0">
+          <div className="z-30 mx-auto mb-20 flex w-full pt-[115px] sm:max-w-screen-2xl md:gap-[60px]">
             <div className="flex w-full flex-col justify-between gap-8 sm:flex-row">
               <SearchInput
                 setUserSearchInput={setUserSearchInput}

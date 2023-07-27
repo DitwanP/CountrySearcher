@@ -51,7 +51,7 @@ const FilterInput = ({
           <img
             src={theme === "dark" ? ChevronDownWhite : ChevronDown}
             alt="Downward Chevron Icon"
-            className={`h-8 w-8 touch-none transition-transform duration-500 ${
+            className={`h-8 w-8 touch-none transition-transform duration-150 ${
               isMenuOpen && "rotate-180"
             }`}
           />
@@ -59,7 +59,7 @@ const FilterInput = ({
       </div>
       <div
         className={`custom-shadow bg-light-mode-bg-200 dark:bg-dark-mode-bg-400 absolute top-[65px] z-30 flex h-0 w-full transform-gpu flex-col justify-between 
-        overflow-hidden rounded-lg px-8 text-black drop-shadow-2xl transition-all duration-500 ease-in-out
+        overflow-hidden rounded-lg px-8 text-black drop-shadow-2xl transition-all duration-150 ease-in-out
         dark:text-primary-dark ${isMenuOpen && "h-[250px] py-8"}`}
       >
         {dropdownOptions}
@@ -98,7 +98,7 @@ const Option = (props: OptionProps) => {
   };
 
   return (
-    <div className="flex justify-between transition-all duration-500">
+    <div className="flex justify-between transition-all duration-150">
       <label
         htmlFor={region}
         className="text-[16px] font-light tracking-widest"

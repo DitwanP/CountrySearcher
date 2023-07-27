@@ -12,8 +12,8 @@ interface ThemeToggleProps {
 
 const ThemeToggle = ({ theme, setTheme }: ThemeToggleProps) => {
   const fullConfig = resolveConfig(tailwindConfig);
-  const lightModeBg = fullConfig.theme.colors["dark-mode-bg"];
-  const darkModeBg = fullConfig.theme.colors["light-mode-bg"];
+  const darkModeBg = fullConfig.theme.colors["dark-mode-bg"];
+  const lightModeBg = fullConfig.theme.colors["light-mode-bg"];
 
   const handleThemeToggle = () => {
     if (theme === "dark") {
@@ -26,37 +26,16 @@ const ThemeToggle = ({ theme, setTheme }: ThemeToggleProps) => {
   };
 
   useEffect(() => {
-    console.log("Changes css variables");
     if (theme === "dark") {
-      document.documentElement.style.setProperty("--cell-color", darkModeBg);
-      document.documentElement.style.setProperty(
-        "--scrollbar-track-color",
-
-        lightModeBg
-      );
-      document.documentElement.style.setProperty(
-        "--scrollbar-color",
-        darkModeBg
-      );
-      document.documentElement.style.setProperty(
-        "--focus-border-color",
-        darkModeBg
-      );
-    } else {
+      document.documentElement.style.setProperty("--document-bg", darkModeBg);
       document.documentElement.style.setProperty("--cell-color", lightModeBg);
-      document.documentElement.style.setProperty(
-        "--scrollbar-track-color",
-        darkModeBg
-      );
-      document.documentElement.style.setProperty(
-        "--scrollbar-color",
-
-        lightModeBg
-      );
-      document.documentElement.style.setProperty(
-        "--focus-border-color",
-        lightModeBg
-      );
+      document.documentElement.style.setProperty("--scrollbar-bg", darkModeBg);
+      document.documentElement.style.setProperty("--scrollbar", lightModeBg);
+    } else {
+      document.documentElement.style.setProperty("--document-bg", lightModeBg);
+      document.documentElement.style.setProperty("--cell-color", darkModeBg);
+      document.documentElement.style.setProperty("--scrollbar-bg", lightModeBg);
+      document.documentElement.style.setProperty("--scrollbar", darkModeBg);
     }
   }, [theme]);
   return (
