@@ -81,7 +81,6 @@ const CountryList = (props: CountryListProps) => {
           return i === currentCountriesInfo.length - 1 ? (
             <LazyLoad key={i}>
               <CountryCard
-                myKey={i}
                 theme={theme}
                 countryInfo={country}
                 lastCountryRef={ref}
@@ -91,7 +90,6 @@ const CountryList = (props: CountryListProps) => {
           ) : (
             <LazyLoad key={i}>
               <CountryCard
-                myKey={i}
                 theme={theme}
                 countryInfo={country}
                 setDialogInfo={setDialogInfo}

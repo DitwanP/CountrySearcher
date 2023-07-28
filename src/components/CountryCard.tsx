@@ -1,7 +1,6 @@
 import { Country, DialogStateInterface } from "../utilities/Interfaces";
 interface CountryCardProps {
   theme: string;
-  myKey: number;
   countryInfo?: Country;
   lastCountryRef?: (element: any) => void;
   entry?: IntersectionObserverEntry;
@@ -9,7 +8,7 @@ interface CountryCardProps {
 }
 
 const CountryCard = (props: CountryCardProps) => {
-  const { countryInfo, lastCountryRef, setDialogInfo, theme, myKey } = props;
+  const { countryInfo, lastCountryRef, setDialogInfo, theme } = props;
 
   const openDialog = () => {
     setDialogInfo({
