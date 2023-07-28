@@ -12,7 +12,7 @@ const SearchInput = ({ theme, setUserSearchInput }: SearchInputProps) => {
   };
 
   return (
-    <div className="custom-shadow group relative h-24 w-full overflow-hidden rounded-lg border-2 border-black dark:border-white md:max-w-[480px]">
+    <div className="custom-shadow group relative h-24 w-full overflow-hidden rounded-lg border-0 border-black dark:border-white md:max-w-[480px]">
       <div
         className={`absolute left-[0px] h-full w-full group-hover:bg-right ${
           theme === "dark"
@@ -24,17 +24,17 @@ const SearchInput = ({ theme, setUserSearchInput }: SearchInputProps) => {
         <img
           src={theme === "dark" ? MagnifyingGlassWhite : MagnifyingGlass}
           alt="Magnifying Glass Icon"
-          className="absolute left-8 top-1/2 z-10 h-8 w-8 -translate-y-1/2 md:h-8 md:w-8"
+          className="absolute left-8 top-1/2 z-10 h-7 w-7 -translate-y-1/2"
         />
       </label>
       <input
         type="text"
         id="countrySearchInput"
         onChange={handleInput}
-        placeholder="Search for a country..."
+        placeholder="SEARCH FOR A COUNTRY..."
         aria-label="Country search text input"
         className="dark:bg-dark-mode-bg-400 absolute h-full w-full bg-white bg-opacity-5 px-[55px] text-3xl font-normal
-          tracking-wide text-black placeholder:text-2xl placeholder:text-black 
+          tracking-wide text-black placeholder:text-[14px] placeholder:text-black 
           dark:bg-opacity-5 dark:text-white placeholder:dark:text-white"
       />
     </div>

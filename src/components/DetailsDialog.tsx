@@ -1,15 +1,8 @@
 import { useEffect, useState } from "react";
 import { Country, DialogProps } from "../utilities/Interfaces";
-import LeftArrow from "../assets/images/left-arrow.svg";
-import LeftArrowWhite from "../assets/images/left-arrow-white.svg";
 import getCountryFromCode from "../utilities/functions/getCountriesFromCode";
 
-const DetailsDialog = ({
-  isOpen,
-  theme,
-  setDialogInfo,
-  country,
-}: DialogProps) => {
+const DetailsDialog = ({ isOpen, setDialogInfo, country }: DialogProps) => {
   const [currentCountry, setCurrentCountry] = useState<Country>(
     country as Country
   );
@@ -76,7 +69,7 @@ const DetailsDialog = ({
           </div>
           <div className="flex w-full flex-col justify-start gap-3 pb-16 md:w-[90%] lg:w-4/5 lg:pb-0 xl:w-3/4">
             <div>
-              <p className="mb-8 text-4xl font-normal tracking-[0.1em] sm:text-4.5xl lg:text-6xl">
+              <p className="mb-8 text-4xl font-normal tracking-wide sm:text-4.5xl lg:text-6xl">
                 {currentCountry?.name
                   .normalize("NFD")
                   .replace(/[\u0300-\u036f]/g, "")
@@ -86,74 +79,74 @@ const DetailsDialog = ({
             <div className="flex h-full w-full flex-col md:flex-row md:gap-8">
               <div className="flex w-full flex-col gap-4">
                 <div>
-                  <span className="text-3xl font-semibold tracking-widest lg:text-4xl xl:text-5xl">
+                  <span className="text-3xl font-medium lg:text-4xl xl:text-5xl">
                     Native Name:{" "}
                   </span>
-                  <span className="text-3xl font-extralight tracking-widest sm:text-4xl lg:text-4xl xl:text-5xl">
+                  <span className="text-3xl font-extralight tracking-normal sm:text-4xl lg:text-4xl xl:text-5xl">
                     {currentCountry?.nativeName}
                   </span>
                 </div>
                 <div>
-                  <span className="text-3xl font-semibold tracking-widest lg:text-4xl xl:text-5xl">
+                  <span className="text-3xl font-medium lg:text-4xl xl:text-5xl">
                     Population:{" "}
                   </span>
-                  <span className="text-3xl font-extralight  tracking-widest sm:text-4xl lg:text-4xl xl:text-5xl">
+                  <span className="text-3xl font-extralight tracking-normal sm:text-4xl lg:text-4xl xl:text-5xl">
                     {currentCountry?.population.toLocaleString()}
                   </span>
                 </div>
                 <div>
-                  <span className="text-3xl font-semibold tracking-widest lg:text-4xl xl:text-5xl">
+                  <span className="text-3xl font-medium lg:text-4xl xl:text-5xl">
                     Region:{" "}
                   </span>
-                  <span className="text-3xl font-extralight  tracking-widest sm:text-4xl lg:text-4xl xl:text-5xl">
+                  <span className="text-3xl font-extralight tracking-normal sm:text-4xl lg:text-4xl xl:text-5xl">
                     {currentCountry?.region}
                   </span>
                 </div>
                 <div>
-                  <span className="text-3xl font-semibold tracking-widest lg:text-4xl xl:text-5xl">
+                  <span className="text-3xl font-medium lg:text-4xl xl:text-5xl">
                     Sub Region:{" "}
                   </span>
-                  <span className="text-3xl font-extralight  tracking-widest sm:text-4xl lg:text-4xl xl:text-5xl">
+                  <span className="text-3xl font-extralight tracking-normal sm:text-4xl lg:text-4xl xl:text-5xl">
                     {currentCountry?.subregion}
                   </span>
                 </div>
-                <p className="font-lextraight mb-12 text-3xl  tracking-widest transition-transform lg:text-4xl xl:text-5xl">
-                  <span className="text-3xl font-semibold tracking-widest lg:text-4xl xl:text-5xl">
+                <div className="mb-12">
+                  <span className="text-3xl lg:text-4xl xl:text-5xl">
                     Capital:{" "}
                   </span>
                   {!currentCountry?.currencies ? (
-                    <span className="text-3xl font-extralight tracking-widest sm:text-4xl lg:text-4xl xl:text-5xl">
+                    <span className="text-3xl font-extralight tracking-normal sm:text-4xl lg:text-4xl xl:text-5xl">
                       N/A
                     </span>
                   ) : (
-                    <span className="text-3xl font-extralight tracking-widest sm:text-4xl lg:text-4xl xl:text-5xl">
+                    <span className="text-3xl font-extralight tracking-normal sm:text-4xl lg:text-4xl xl:text-5xl">
                       {currentCountry?.capital}
                     </span>
                   )}
-                </p>
+                </div>
               </div>
 
               <div className="flex w-full flex-col gap-4">
                 <div>
-                  <span className="text-3xl font-semibold tracking-widest lg:text-4xl xl:text-5xl">
+                  <span className="text-3xl font-medium lg:text-4xl xl:text-5xl">
                     Top Level Domain:{" "}
                   </span>
-                  <span className="text-3xl font-extralight tracking-widest sm:text-4xl lg:text-4xl xl:text-5xl">
+                  <span className="text-3xl font-extralight tracking-normal sm:text-4xl lg:text-4xl xl:text-5xl">
                     {currentCountry?.topLevelDomain}
                   </span>
                 </div>
                 <div>
-                  <span className="text-3xl font-semibold tracking-widest lg:text-4xl xl:text-5xl">
+                  <span className="text-3xl font-medium lg:text-4xl xl:text-5xl">
                     Currencies:{" "}
                   </span>
                   {!currentCountry?.currencies && (
-                    <span className="text-3xl font-extralight tracking-widest sm:text-4xl lg:text-4xl xl:text-5xl">
+                    <span className="text-3xl font-extralight tracking-normal sm:text-4xl lg:text-4xl xl:text-5xl">
                       N/A
                     </span>
                   )}
                   {currentCountry?.currencies?.map((currency, index) => (
                     <span
-                      className="text-3xl font-extralight tracking-widest sm:text-4xl lg:text-4xl xl:text-5xl"
+                      className="text-3xl font-extralight tracking-normal sm:text-4xl lg:text-4xl xl:text-5xl"
                       key={index}
                     >
                       {currency.name}
@@ -165,12 +158,12 @@ const DetailsDialog = ({
                   ))}
                 </div>
                 <div className="mb-12">
-                  <span className="text-3xl font-semibold tracking-widest lg:text-4xl xl:text-5xl">
+                  <span className="text-3xl font-medium lg:text-4xl xl:text-5xl">
                     Languages:{" "}
                   </span>
                   {currentCountry?.languages?.map((currency, index) => (
                     <span
-                      className="text-3xl font-extralight tracking-widest sm:text-4xl lg:text-4xl xl:text-5xl"
+                      className="text-3xl font-extralight tracking-normal sm:text-4xl lg:text-4xl xl:text-5xl"
                       key={index}
                     >
                       {currency.name}
@@ -184,7 +177,7 @@ const DetailsDialog = ({
               </div>
             </div>
             <div className="">
-              <span className="text-3xl font-semibold tracking-wider lg:text-4xl xl:text-5xl">
+              <span className="text-3xl font-medium  lg:text-4xl xl:text-5xl">
                 Border Countries:{" "}
               </span>
               {!currentCountry?.borders && (

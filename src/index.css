@@ -103,16 +103,6 @@ div:focus-visible {
   background-position: right center;
 }
 
-.test {
-  background-color: #1c1c1c;
-  background-color: #303030;
-}
-
-.glass {
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(80px);
-}
-
 .no-tap-highlighting {
   -webkit-tap-highlight-color: transparent;
 }

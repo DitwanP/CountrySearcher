@@ -9,6 +9,7 @@ import CountryCard from "../components/CountryCard";
 import getCountries from "../utilities/functions/getCountries";
 import DetailsDialog from "./DetailsDialog";
 import Loader from "./Loader";
+import LazyLoad from "react-lazy-load";
 
 const allCountriesInfo: Country[] = CountryData;
 export interface CountryListProps {
@@ -78,20 +79,24 @@ const CountryList = (props: CountryListProps) => {
       ) : (
         currentCountriesInfo?.map((country, i) => {
           return i === currentCountriesInfo.length - 1 ? (
-            <CountryCard
-              key={i}
-              theme={theme}
-              countryInfo={country}
-              lastCountryRef={ref}
-              setDialogInfo={setDialogInfo}
-            />
+            <LazyLoad key={i}>
+              <CountryCard
+                myKey={i}
+                theme={theme}
+                countryInfo={country}
+                lastCountryRef={ref}
+                setDialogInfo={setDialogInfo}
+              />
+            </LazyLoad>
           ) : (
-            <CountryCard
-              key={i}
-              theme={theme}
-              countryInfo={country}
-              setDialogInfo={setDialogInfo}
-            />
+            <LazyLoad key={i}>
+              <CountryCard
+                myKey={i}
+                theme={theme}
+                countryInfo={country}
+                setDialogInfo={setDialogInfo}
+              />
+            </LazyLoad>
           );
         })
       )}
