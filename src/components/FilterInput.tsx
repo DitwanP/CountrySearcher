@@ -59,9 +59,8 @@ const FilterInput = ({
       </div>
       <div
         className={`custom-shadow absolute top-[65px] z-30 flex h-0 w-full flex-col 
-        justify-between overflow-hidden rounded-lg border-0 border-black px-8 text-black 
-        drop-shadow-2xl transition-all duration-300 ease-out dark:border-white 
-        dark:text-primary-dark ${isMenuOpen && "h-[220px] py-8 "} ${
+        justify-between overflow-hidden rounded-lg px-8 drop-shadow-2xl transition-all duration-300 ease-out dark:border-white 
+        ${isMenuOpen && "h-[220px] py-8 "} ${
           theme === "dark"
             ? "custom-button-gradient-dark"
             : "custom-button-gradient-light"
@@ -103,7 +102,7 @@ const Option = (props: OptionProps) => {
   };
 
   return (
-    <div className="flex justify-between transition-all duration-150">
+    <div className="flex justify-between text-black transition-colors duration-300 dark:text-white">
       <label
         htmlFor={region}
         className="text-[14px] tracking-widest hover:cursor-pointer"
