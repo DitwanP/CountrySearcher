@@ -47,6 +47,8 @@ By simulating the request behavior, I successfully paginated the project's data 
 
 In terms of styling, I chose a unique approach to this project, granting myself creative freedom and the opportunity to delve into more complex CSS techniques. This decision proved to be a great learning experience, as it allowed me to explore the trade-offs between aesthetics and performance, particularly when dealing with elements like blur, which can significantly impact a website's overall performance.
 
+I also learned that designing is tricky and I'm not very good at it for now. 😄
+
 ### Continued development
 
 I want to focus on optomizing my sites for a more speedy website. I want to find a good balance between visually pleasing and snappy. I also want to learn more about incorporating things like smooth scrolling and animations triggered by scroll.
