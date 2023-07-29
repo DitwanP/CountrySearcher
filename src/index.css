@@ -37,7 +37,6 @@ body.modal-open {
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-bg) var(--scrollbar);
 }
 
 /* Chrome, Edge, and Safari */
@@ -62,7 +61,7 @@ body.modal-open {
 }
 
 a:focus,
-button:focus,
+button:focus-visible,
 input:focus,
 div:focus {
   outline: none;
@@ -109,8 +108,8 @@ div:focus {
 
 .fade-in {
   opacity: 0;
-  animation: fade-in 0.7s ease-in forwards;
-  animation-delay: 200ms;
+  animation: fade-in 0.5s ease-in forwards;
+  animation-delay: 400ms;
 }
 
 .fade-in-icon {
@@ -118,15 +117,15 @@ div:focus {
   animation: fade-in 0.7s ease-in forwards;
 }
 
-.slide-up {
-  opacity: 1;
-  bottom: 25px;
-  animation-timing-function: ease-in;
+.slide-in {
+  top: 400px;
+  opacity: 0;
+  animation: slide-in 0.5s ease-in forwards;
 }
 
 /* Loader */
 .mosaic-loader {
-  --cell-size: 15px;
+  --cell-size: 20px;
   --cell-spacing: 4px;
   --cells: 4;
   --total-size: calc(
@@ -139,11 +138,10 @@ div:focus {
 }
 .mosaic-loader > .cell {
   flex: 0 0 var(--cell-size);
-  height: 20px;
+  height: 28px;
   margin: 2px;
   background-color: transparent;
   border: 1px solid var(--cell-color);
-
   animation: 1.5s ripple ease infinite;
 }
 .mosaic-loader > .cell.d-1 {
@@ -180,6 +178,13 @@ div:focus {
   }
 }
 /* Loader */
+
+@keyframes slide-in {
+  100% {
+    top: 0px;
+    opacity: 1;
+  }
+}
 
 @keyframes fade-in {
   100% {

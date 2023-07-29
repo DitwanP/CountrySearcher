@@ -33,19 +33,13 @@ const FilterInput = ({
   return (
     <div className="custom-shadow group relative flex h-24 min-w-[250px] flex-col gap-1 rounded-lg text-black dark:text-white">
       <div className="relative left-0 top-0 h-full w-full overflow-hidden rounded-lg border-0 border-black dark:border-white">
-        <div
-          className={`absolute left-[0px] h-full w-full group-hover:bg-right ${
-            theme === "dark"
-              ? "custom-button-gradient-dark"
-              : "custom-button-gradient-light"
-          }`}
-        ></div>
+        <div className="absolute left-[0px] h-full w-full bg-light-mode-bg group-hover:bg-right dark:bg-dark-mode-bg"></div>
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Region filter dropdown menu toggle"
-          className=" no-tap-highlighting absolute z-40 flex h-full w-full items-center justify-between 
+          className="no-tap-highlighting absolute z-40 flex h-full w-full items-center justify-between 
           gap-14 overflow-hidden bg-white bg-opacity-5 px-8 text-[14px] tracking-widest 
-          transition-all duration-100 ease-in active:scale-[.95] dark:bg-black dark:bg-opacity-5"
+          active:scale-[.95] dark:bg-black dark:bg-opacity-5"
         >
           FILTER BY REGION
           <img
@@ -58,12 +52,9 @@ const FilterInput = ({
         </button>
       </div>
       <div
-        className={`custom-shadow absolute top-[65px] z-30 flex h-0 w-full flex-col 
-        justify-between overflow-hidden rounded-lg px-8 drop-shadow-2xl transition-all duration-300 ease-out dark:border-white 
-        ${isMenuOpen && "h-[220px] py-8 "} ${
-          theme === "dark"
-            ? "custom-button-gradient-dark"
-            : "custom-button-gradient-light"
+        className={`custom-shadow absolute top-[70px] z-30 flex h-0 w-full flex-col justify-between overflow-hidden rounded-lg 
+        bg-light-mode-bg px-8 drop-shadow-2xl transition-all duration-[400ms] ease-out dark:bg-dark-mode-bg ${
+          isMenuOpen && "h-[220px] py-8"
         }`}
       >
         {dropdownOptions}
@@ -102,7 +93,11 @@ const Option = (props: OptionProps) => {
   };
 
   return (
-    <div className="flex justify-between text-black transition-colors duration-300 dark:text-white">
+    <div
+      className={`flex justify-between text-black transition-opacity duration-75 ease-linear dark:text-white ${
+        isMenuOpen ? "opacity-100" : "opacity-0"
+      }`}
+    >
       <label
         htmlFor={region}
         className="text-[14px] tracking-widest hover:cursor-pointer"
