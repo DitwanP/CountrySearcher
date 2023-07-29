@@ -26,18 +26,21 @@ const ThemeToggle = ({ theme, setTheme }: ThemeToggleProps) => {
   };
 
   useEffect(() => {
-    if (theme === "dark") {
+    if (localStorage.theme === "dark") {
+      document.documentElement.classList.add("dark");
       document.documentElement.style.setProperty("--document-bg", darkModeBg);
       document.documentElement.style.setProperty("--cell-color", lightModeBg);
       document.documentElement.style.setProperty("--scrollbar-bg", darkModeBg);
       document.documentElement.style.setProperty("--scrollbar", lightModeBg);
     } else {
+      document.documentElement.classList.remove("dark");
       document.documentElement.style.setProperty("--document-bg", lightModeBg);
       document.documentElement.style.setProperty("--cell-color", darkModeBg);
       document.documentElement.style.setProperty("--scrollbar-bg", lightModeBg);
       document.documentElement.style.setProperty("--scrollbar", darkModeBg);
     }
   }, [theme]);
+
   return (
     <button
       onClick={handleThemeToggle}
@@ -45,17 +48,13 @@ const ThemeToggle = ({ theme, setTheme }: ThemeToggleProps) => {
             gap-3 text-primary-light focus:border-none"
     >
       {theme === "light" && (
-        <img
-          src={Sun}
-          alt="Sun Icon"
-          className="fade-in-icon h-10 w-10 md:h-12 md:w-12"
-        />
+        <img src={Sun} alt="Sun Icon" className="h-10 w-10 md:h-12 md:w-12" />
       )}
       {theme === "dark" && (
         <img
           src={CrescentMoonWhite}
           alt="Crescent Moon Icon"
-          className="fade-in-icon h-8 w-8 md:h-10 md:w-10"
+          className="h-8 w-8 md:h-10 md:w-10"
         />
       )}
     </button>

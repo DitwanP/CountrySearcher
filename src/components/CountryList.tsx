@@ -50,7 +50,7 @@ const CountryList = (props: CountryListProps) => {
   const { ref, entry } = useIntersection({
     root: null,
     rootMargin: "0px",
-    threshold: 0.1,
+    threshold: 1,
   });
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const CountryList = (props: CountryListProps) => {
   return (
     <div
       ref={countryListRef}
-      className="grid w-full gap-12 sm:grid-cols-2 md2:grid-cols-3 xl:grid-cols-4"
+      className="grid w-full gap-12 overflow-hidden pb-20 sm:grid-cols-2 md2:grid-cols-3 xl:grid-cols-4"
     >
       {isFetching ? (
         <div className="absolute left-0 mt-64 flex w-full justify-center">
@@ -78,10 +78,9 @@ const CountryList = (props: CountryListProps) => {
         </div>
       ) : (
         currentCountriesInfo?.map((country, i) => {
-          return i === currentCountriesInfo.length - 1 ? (
+          return i === currentCountriesInfo.length - 5 ? (
             <LazyLoad key={i}>
               <CountryCard
-                theme={theme}
                 countryInfo={country}
                 lastCountryRef={ref}
                 setDialogInfo={setDialogInfo}
@@ -90,7 +89,6 @@ const CountryList = (props: CountryListProps) => {
           ) : (
             <LazyLoad key={i}>
               <CountryCard
-                theme={theme}
                 countryInfo={country}
                 setDialogInfo={setDialogInfo}
               />
