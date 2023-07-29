@@ -42,7 +42,7 @@ const CountryCard = (props: CountryCardProps) => {
                 .normalize("NFD")
                 .replace(/[\u0300-\u036f]/g, "")}'s flag`}
               className="fade-in h-full w-full -rotate-[10deg] scale-[1.8] transform-gpu object-cover
-                transition-all duration-500 dark:brightness-[.85] md:group-hover:rotate-[0deg]
+                transition-all dark:brightness-[.85] md:group-hover:rotate-[0deg]
                 md:group-hover:scale-[1] md:group-hover:brightness-[1] md:group-hover:saturate-[1]
                 md:group-focus:rotate-[0deg] md:group-focus:scale-[1] md:group-focus:brightness-[1] 
                 md:group-focus:saturate-[1]"
