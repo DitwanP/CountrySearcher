@@ -29,8 +29,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [https://ditwanp.github.io/AgeCalculatorFM/](https://ditwanp.github.io/AgeCalculatorFM/)
+- [Live Site URL](https://ditwanp.github.io/AgeCalculatorFM/)
+- [My FrontendMentor Solution]([https://your-solution-url.com](https://www.frontendmentor.io/solutions/react-typescript-tailwind-mocked-data-pagination-load-on-scroll-_2nrn9r-DM))
 
 ### Built with
 
