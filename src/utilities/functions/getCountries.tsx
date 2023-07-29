@@ -7,7 +7,7 @@ export default async function getCountries(
   queriedCountries: Country[]
 ) {
   if (initialFetch) {
-    const randomTimeout = Math.floor(Math.random() * 500) + 1000;
+    const randomTimeout = Math.floor(Math.random() * 0) + 0;
     if (page == 1) {
       await new Promise((resolve) => setTimeout(resolve, randomTimeout));
     }
