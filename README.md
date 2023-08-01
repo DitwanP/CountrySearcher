@@ -41,7 +41,7 @@ Users should be able to:
 
 ### What I learned
 
-One of the most valuable lessons I gained from this project was understanding the concept of paginating data and implementing an infinite scroll behavior to load additional content. Upon examining the provided API for the project, I noticed its subpar performance. As a result, I opted to simulate data loading from an API by introducing a random timeout.
+One of the most valuable lessons I gained from this project was understanding the concept of paginating data and implementing an infinite scroll behavior to load additional content.
 
 By simulating the request behavior, I successfully paginated the project's data and integrated infinite scroll functionality, which activates when users reach a predefined threshold.
 
