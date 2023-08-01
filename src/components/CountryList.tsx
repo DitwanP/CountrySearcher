@@ -84,10 +84,6 @@ const CountryList = (props: CountryListProps) => {
     refetch();
   }, [filteredCountries]);
 
-  useEffect(() => {
-    console.log(isLoading);
-  }, [isLoading]);
-
   // Update data when user inputs into search or filters
   useLayoutEffect(() => {
     let newCountries: typeof CountryListSchema["_output"];
