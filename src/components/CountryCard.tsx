@@ -37,10 +37,13 @@ const CountryCard = (props: CountryCardProps) => {
         <div className="relative z-20 flex h-full w-full flex-col items-center justify-center gap-6 overflow-hidden px-8 py-10 text-center text-black dark:text-white">
           <div className="absolute h-full w-full">
             <img
-              src={countryInfo.flag}
-              alt={`${countryInfo.name
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "")}'s flag`}
+              src={countryInfo.flags?.svg}
+              alt={
+                countryInfo.flags?.alt ||
+                `${countryInfo.name.common
+                  .normalize("NFD")
+                  .replace(/[\u0300-\u036f]/g, "")}'s flag`
+              }
               className="fade-in h-full w-full -rotate-[10deg] scale-[1.8] transform-gpu object-cover
                 transition-all dark:brightness-[.85] md:group-hover:rotate-[0deg]
                 md:group-hover:scale-[1] md:group-hover:brightness-[1] md:group-hover:saturate-[1]
@@ -50,7 +53,7 @@ const CountryCard = (props: CountryCardProps) => {
           </div>
           <div className="z-30 flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-lg border-2 border-black bg-white bg-opacity-50 p-8 backdrop-blur-[50px] dark:border-white dark:bg-black dark:bg-opacity-20 xl:group-hover:bg-opacity-40">
             <span className="text-[20px] font-normal leading-snug tracking-[0.2em]">
-              {countryInfo.name
+              {countryInfo.name.common
                 .normalize("NFD")
                 .replace(/[\u0300-\u036f]/g, "")
                 .toUpperCase()}
@@ -63,7 +66,9 @@ const CountryCard = (props: CountryCardProps) => {
                 capital{": "}
                 <br />
                 <span className="text-[20px] font-light tracking-widest">
-                  {countryInfo.capital?.toUpperCase() || "N/A"}
+                  {countryInfo.capital
+                    ? countryInfo.capital[0]?.toUpperCase()
+                    : "N/A"}
                 </span>
               </p>
               <p className="text-2xl font-light tracking-widest">

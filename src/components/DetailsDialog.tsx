@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Country, DialogProps } from "../utilities/Interfaces";
-import getCountryFromCode from "../utilities/functions/getCountriesFromCode";
+import { countryDictionary } from "../utilities/functions/getCountries";
 
 const DetailsDialog = ({ isOpen, setDialogInfo, country }: DialogProps) => {
   const [currentCountry, setCurrentCountry] = useState<Country>(
@@ -9,8 +9,8 @@ const DetailsDialog = ({ isOpen, setDialogInfo, country }: DialogProps) => {
   const [prevCountries, setPrevCountries] = useState<string[]>([]);
 
   const changeCountry = async (countryCode: string) => {
-    setPrevCountries((prev) => [...prev, currentCountry?.alpha3Code as string]);
-    let nextCountry = await getCountryFromCode(countryCode);
+    setPrevCountries((prev) => [...prev, currentCountry?.cca3 as string]);
+    let nextCountry = countryDictionary.get(countryCode);
     setCurrentCountry(nextCountry as Country);
   };
 
@@ -18,7 +18,7 @@ const DetailsDialog = ({ isOpen, setDialogInfo, country }: DialogProps) => {
     const prevCountryCode = prevCountries.pop();
 
     if (prevCountryCode) {
-      let prevCountry = await getCountryFromCode(prevCountryCode);
+      let prevCountry = countryDictionary.get(prevCountryCode);
       const poppedPrev = prevCountries.filter((code) => {
         return code !== prevCountryCode;
       });
@@ -58,15 +58,18 @@ const DetailsDialog = ({ isOpen, setDialogInfo, country }: DialogProps) => {
         <div className="mx-auto flex flex-col items-center justify-center gap-14 rounded-md md:gap-16">
           <div className="flex flex-col gap-16 pb-20">
             <img
-              src={currentCountry?.flag}
-              alt={`${currentCountry?.name}'s flag`}
-              className="custom-shadow rounded-md object-contain
-                transition-transform duration-150 ease-out"
+              src={currentCountry?.flags?.svg}
+              alt={
+                currentCountry?.flags?.alt ||
+                `${currentCountry?.name.common}'s flag`
+              }
+              className="custom-shadow w-[400px] rounded-md
+                object-contain transition-transform duration-150 ease-out"
             />
             <div className="flex flex-col justify-start gap-3 ">
               <div>
                 <p className="mb-8 text-4xl font-normal tracking-wide sm:text-4.5xl lg:text-7xl">
-                  {currentCountry?.name
+                  {currentCountry?.name.common
                     .normalize("NFD")
                     .replace(/[\u0300-\u036f]/g, "")
                     .toUpperCase()}
@@ -79,7 +82,9 @@ const DetailsDialog = ({ isOpen, setDialogInfo, country }: DialogProps) => {
                       Native Name:{" "}
                     </span>
                     <span className="text-3xl font-extralight tracking-normal sm:text-4xl lg:text-4xl xl:text-5xl">
-                      {currentCountry?.nativeName}
+                      {currentCountry?.name.nativeName
+                        ? currentCountry.name.nativeName[0]?.official
+                        : "N/A"}
                     </span>
                   </div>
                   <div>
@@ -128,7 +133,7 @@ const DetailsDialog = ({ isOpen, setDialogInfo, country }: DialogProps) => {
                       Top Level Domain:{" "}
                     </span>
                     <span className="text-3xl font-extralight tracking-normal sm:text-4xl lg:text-4xl xl:text-5xl">
-                      {currentCountry?.topLevelDomain}
+                      {currentCountry?.tld ? currentCountry.tld[0] : "N/A"}
                     </span>
                   </div>
                   <div>
@@ -140,20 +145,28 @@ const DetailsDialog = ({ isOpen, setDialogInfo, country }: DialogProps) => {
                         N/A
                       </span>
                     )}
-                    {currentCountry?.currencies?.map((currency, index) => (
-                      <span
-                        className="text-3xl font-extralight tracking-normal sm:text-4xl lg:text-4xl xl:text-5xl"
-                        key={index}
-                      >
-                        {currency.name}
-                        {currentCountry?.currencies &&
-                        index !== currentCountry.currencies.length - 1
-                          ? ", "
-                          : ""}
-                      </span>
-                    ))}
+                    {currentCountry?.currencies &&
+                      Object.keys(currentCountry.currencies).length !== 0 &&
+                      Object.keys(currentCountry.currencies).map(
+                        (currency, index) => (
+                          <span
+                            className="text-3xl font-extralight tracking-normal sm:text-4xl lg:text-4xl xl:text-5xl"
+                            key={index}
+                          >
+                            {currentCountry?.currencies?.[currency]?.name}
+                            {currentCountry?.currencies?.[currency]?.symbol
+                              ? ` (${currentCountry?.currencies?.[currency]?.symbol})`
+                              : ""}
+                            {currentCountry?.currencies &&
+                            index !==
+                              Object.keys(currentCountry.currencies).length - 1
+                              ? ", "
+                              : ""}
+                          </span>
+                        )
+                      )}
                   </div>
-                  <div>
+                  {/* <div>
                     <span className="text-3xl font-medium lg:text-4xl xl:text-5xl">
                       Languages:{" "}
                     </span>
@@ -191,7 +204,7 @@ const DetailsDialog = ({ isOpen, setDialogInfo, country }: DialogProps) => {
                           : ""}
                       </span>
                     ))}
-                  </div>
+                  </div> */}
                   <div className="mb-12">
                     <span className="text-3xl font-medium lg:text-4xl xl:text-5xl">
                       Timezones:{" "}

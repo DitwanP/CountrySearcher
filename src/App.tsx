@@ -18,6 +18,7 @@ function App() {
   const [theme, setTheme] = useState(defautTheme);
   const [filters, setFilters] = useState(defaultFilterState);
   const [userSearchInput, setUserSearchInput] = useState("");
+
   return (
     <QueryClientProvider client={queryClient}>
       <div className="min-h-[100dvh] bg-light-mode-bg dark:bg-dark-mode-bg">

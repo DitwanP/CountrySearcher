@@ -62,7 +62,7 @@ body.modal-open {
 
 a:focus,
 button:focus-visible,
-input:focus,
+input:focus-visible,
 div:focus {
   outline: none;
   border: 4px solid rgb(123, 187, 251);
