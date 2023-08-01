@@ -10,13 +10,14 @@ interface FilterInputProps {
   filterStateSetter: React.Dispatch<React.SetStateAction<FilterSet>>;
 }
 
+const regions = ["africa", "americas", "asia", "europe", "oceania"];
+
 const FilterInput = ({
   theme,
   filterState,
   filterStateSetter,
 }: FilterInputProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const regions = ["africa", "americas", "asia", "europe", "oceania"];
 
   const dropdownOptions = regions.map((region, index) => {
     return (
@@ -72,6 +73,7 @@ interface OptionProps {
 
 const Option = (props: OptionProps) => {
   const { region, isMenuOpen, filterState, filterStateSetter } = props;
+  // @ts-ignore
   const formattedRegion = region[0].toUpperCase() + region.slice(1);
 
   const handleFilterChange = () => {

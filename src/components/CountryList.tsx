@@ -1,17 +1,21 @@
-import { Country, DialogStateInterface } from "../utilities/Interfaces";
+import { DialogStateInterface } from "../utilities/Interfaces";
 import { FilterSet } from "../utilities/Types";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useIntersection } from "@mantine/hooks";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useMutateCountries } from "../utilities/hooks/UseMutateCountries";
-import CountryData from "../assets/data/country-data.json";
+import {
+  filterByFilters,
+  filterBySearch,
+  getCountriesData,
+  getCountriesForPage,
+} from "../utilities/functions/getCountries";
+import { CountryListSchema } from "../utilities/Schemas";
+
 import CountryCard from "../components/CountryCard";
-import getCountries from "../utilities/functions/getCountries";
 import DetailsDialog from "./DetailsDialog";
 import Loader from "./Loader";
 import LazyLoad from "react-lazy-load";
 
-const allCountriesInfo: Country[] = CountryData;
 export interface CountryListProps {
   userSearchInput: string;
   filters: FilterSet;
@@ -23,28 +27,38 @@ const defaultDialogState: DialogStateInterface = {
   country: undefined,
 };
 
-const CountryList = (props: CountryListProps) => {
-  const { userSearchInput, filters, theme } = props;
-  const cardsPerPage = 16;
-  const [isInitialFetch, setIsInitialFetch] = useState(true);
-  const [dialogInfo, setDialogInfo] = useState(defaultDialogState);
-  const mutateCountriesParams = { userSearchInput, filters, allCountriesInfo };
-  const queriedCountries = useMutateCountries(mutateCountriesParams);
+const CARDS_PER_PAGE = 12;
 
-  const { data, fetchNextPage, refetch, isFetching } = useInfiniteQuery({
+const CountryList = (props: CountryListProps) => {
+  const { userSearchInput, filters } = props;
+  const [dialogInfo, setDialogInfo] = useState(defaultDialogState);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [allCountries, setAllCountries] = useState<
+    typeof CountryListSchema["_output"]
+  >([]);
+
+  const [filteredCountries, setFilteredCountries] = useState<
+    typeof CountryListSchema["_output"]
+  >([]);
+
+  const { data, fetchNextPage, refetch, hasNextPage } = useInfiniteQuery({
     queryKey: ["countriesQuery"],
-    queryFn: ({ pageParam = 1 }) => {
-      if (isInitialFetch) {
-        return getCountries(pageParam, cardsPerPage, true, queriedCountries);
-      }
-      return getCountries(pageParam, cardsPerPage, false, queriedCountries);
+    queryFn: async ({ pageParam = 1 }) =>
+      getCountriesForPage(filteredCountries, pageParam, CARDS_PER_PAGE),
+
+    getNextPageParam: (lastPage, pages) => {
+      let nextPageParam;
+      lastPage.length === CARDS_PER_PAGE
+        ? (nextPageParam = pages.length + 1)
+        : (nextPageParam = undefined);
+      return nextPageParam;
     },
-    getNextPageParam: (_, pages) => pages.length + 1,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });
 
-  const currentCountriesInfo = data?.pages.flatMap((page) => page);
+  const paginatedCountries = data?.pages.flatMap((page) => page);
 
   const countryListRef: any = useRef<HTMLDivElement>();
   const { ref, entry } = useIntersection({
@@ -53,53 +67,79 @@ const CountryList = (props: CountryListProps) => {
     threshold: 1,
   });
 
+  // Fetch all countries data initially
+  useLayoutEffect(() => {
+    getCountriesData(setAllCountries, setFilteredCountries, setIsLoading);
+  }, []);
+
+  // Fetch next page when the last specified card is intersecting with viewport.
   useEffect(() => {
     if (entry?.isIntersecting) {
       fetchNextPage();
     }
   }, [entry]);
 
+  // Whenever filtered country state changes refetch the pages from that new list.
   useEffect(() => {
     refetch();
-  }, [queriedCountries]);
+  }, [filteredCountries]);
 
-  useEffect(() => {
-    setIsInitialFetch(false);
-  }, []);
+  // Update data when user inputs into search or filters
+  useLayoutEffect(() => {
+    let newCountries: typeof CountryListSchema["_output"];
+
+    if (userSearchInput) {
+      newCountries = filterBySearch(allCountries, userSearchInput);
+    } else {
+      newCountries = allCountries;
+    }
+
+    if (filters.size > 0) {
+      newCountries = filterByFilters(newCountries, filters);
+    }
+
+    setFilteredCountries(newCountries);
+  }, [userSearchInput, filters]);
 
   return (
-    <div
-      ref={countryListRef}
-      className="grid w-full gap-12 overflow-hidden pb-20 sm:grid-cols-2 md2:grid-cols-3 xl:grid-cols-4"
-    >
-      {isFetching ? (
-        <div className="absolute left-0 mt-64 flex w-full justify-center">
-          <Loader />
+    <div className="w-full overflow-hidden">
+      <div
+        ref={countryListRef}
+        className="grid w-full gap-12 overflow-hidden pb-20 sm:grid-cols-2 md2:grid-cols-3 xl:grid-cols-4"
+      >
+        {isLoading ? (
+          <div className="absolute left-0 mt-64 flex w-full justify-center">
+            <Loader />
+          </div>
+        ) : (
+          paginatedCountries?.map((country, i) => {
+            return i === paginatedCountries.length - 5 ? (
+              <LazyLoad key={i}>
+                <CountryCard
+                  countryInfo={country}
+                  lastCountryRef={ref}
+                  setDialogInfo={setDialogInfo}
+                />
+              </LazyLoad>
+            ) : (
+              <LazyLoad key={i}>
+                <CountryCard
+                  countryInfo={country}
+                  setDialogInfo={setDialogInfo}
+                />
+              </LazyLoad>
+            );
+          })
+        )}
+      </div>
+      {!hasNextPage && !isLoading && (
+        <div className="flex w-full animate-pulse justify-center pb-8 text-3xl text-black dark:text-white">
+          Nothing more to see here folks 👽
         </div>
-      ) : (
-        currentCountriesInfo?.map((country, i) => {
-          return i === currentCountriesInfo.length - 5 ? (
-            <LazyLoad key={i}>
-              <CountryCard
-                countryInfo={country}
-                lastCountryRef={ref}
-                setDialogInfo={setDialogInfo}
-              />
-            </LazyLoad>
-          ) : (
-            <LazyLoad key={i}>
-              <CountryCard
-                countryInfo={country}
-                setDialogInfo={setDialogInfo}
-              />
-            </LazyLoad>
-          );
-        })
       )}
       {dialogInfo.isOpen && (
         <DetailsDialog
           isOpen={dialogInfo.isOpen}
-          theme={theme}
           setDialogInfo={setDialogInfo}
           country={dialogInfo.country}
         />
