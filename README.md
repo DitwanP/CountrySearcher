@@ -29,7 +29,7 @@ Users should be able to:
 
 ### Links
 
-- [Live Site URL](https://ditwanp.github.io/AgeCalculatorFM/)
+- [Live Site URL](https://ditwanp.github.io/CountrySearcher/)
 - [My FrontendMentor Solution](https://www.frontendmentor.io/solutions/react-typescript-tailwind-mocked-data-pagination-load-on-scroll-_2nrn9r-DM)
 
 ### Built with
